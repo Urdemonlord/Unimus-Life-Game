@@ -1,0 +1,25 @@
+# Ignore Ren'Py specific files
+*.rpyc
+*.rpyi
+*.log
+*.bak
+*.swp
+*.DS_Store
+
+# Ignore system files
+Thumbs.db
+ehthumbs.db
+
+# Ignore Python-specific files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore Ren'Py's build and output directories
+/renpy/  
+/renpy_versions/
+
+# Ignore log, trace, and error files
+*.log
+*.trace
+*.errors.txt

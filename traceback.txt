@@ -1,0 +1,28 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/gui.rpy", line 119, in script
+    define gui.button_text_font = gui.interface_text_font
+  File "game/gui.rpy", line 119, in <module>
+    define gui.button_text_font = gui.interface_text_font
+AttributeError: 'StoreModule' object has no attribute 'interface_text_font'
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/gui.rpy", line 119, in script
+    define gui.button_text_font = gui.interface_text_font
+  File "C:\Users\click\Downloads\Programs\renpy-8.3.3-sdk\renpy\ast.py", line 2235, in execute
+    self.set()
+  File "C:\Users\click\Downloads\Programs\renpy-8.3.3-sdk\renpy\ast.py", line 2249, in set
+    value = renpy.python.py_eval_bytecode(self.code.bytecode)
+  File "C:\Users\click\Downloads\Programs\renpy-8.3.3-sdk\renpy\python.py", line 1202, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/gui.rpy", line 119, in <module>
+    define gui.button_text_font = gui.interface_text_font
+AttributeError: 'StoreModule' object has no attribute 'interface_text_font'
+
+Windows-10-10.0.22631 AMD64
+Ren'Py 8.3.4.24112403+nightly
+Unimus Life Game demo
+Wed Nov 27 16:49:25 2024
