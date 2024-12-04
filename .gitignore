@@ -16,10 +16,14 @@ ehthumbs.db
 __pycache__/
 
 # Ignore Ren'Py's build and output directories
-/renpy/  
+/renpy/
+*.rpyc
 /renpy_versions/
 
 # Ignore log, trace, and error files
 *.log
 *.trace
 *.errors.txt
+log.txt
+traceback.txt
+errors.txt
