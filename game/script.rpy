@@ -6,7 +6,7 @@
             self.ospek_points = 0
             self.friend_relationship = {
                 "Andi": {"score": 0, "background": "Aktivis mahasiswa dengan semangat tinggi"},
-                "Momogi": {"score": 0, "background": "Mahasiswa perantau dengan cita-cita besar"},
+                "Momogi": {"score": 0, "background": "Mahasiswa perantauan dengan cita-cita besar"},
                 "Rina": {"score": 0, "background": "Aktivis kesehatan dan kemanusiaan"},
                 "Joko": {"score": 0, "background": "Senior tegas dengan nilai keagamaan kuat"},
                 "Pak Budi": {"score": 0, "background": "Pembimbing spiritual dengan pengalaman luas"}
@@ -173,6 +173,7 @@ image bg welcome = "images/campus_entrance.jpg"
 image bg ospek_hall = "images/ospek_main_hall.jpg"
 image bg lecture_room = "images/lecture_room.jpg"
 image bg student_center = "images/student_center.jpg"
+image bg welcome_night = "images/welcome_night.jpg"
 define audio.ospek_theme = "audio/ospek_welcome.mp3"
 define audio.challenge_theme = "audio/challenge_theme.mp3"
 define audio.quiz_theme = "audio/quiz_theme.mp3"
@@ -187,22 +188,26 @@ label start:
     "Pagi yang cerah di Universitas Muhammadiyah Semarang (Unimus)."
 
     show nata at center
-    e "Deg-degaran rasanya. Pertama kali masuk kampus setelah sekian lama mempersiapkan diri."
+    e "Deg-degan rasanya. Ini pertama kalinya aku masuk kampus setelah berbulan-bulan mempersiapkan diri. Aku berharap bisa menjalani ospek dengan baik."
 
-    # Introduction to Ospek
+    # Introduksi Pak Budi
     scene bg ospek_hall with fade
     show pak_budi at center
 
-    p "Selamat datang, mahasiswa baru! Di Unimus, kita tidak hanya belajar ilmu akademik tetapi juga nilai-nilai Islam yang menjadi pedoman hidup."
+    p "Selamat datang di Universitas Muhammadiyah Semarang. Ospek ini tidak hanya tentang belajar akademik, tapi juga memperkenalkanmu pada nilai-nilai Islam yang akan membimbing hidupmu."
 
-    # Dialog Refleksi Al-Islam dan Kemuhammadiyahan
+    # Introduksi Teman-teman
     show andi at left
     show momogi at right
+    show rina at right
 
-    a "Salah satu yang menarik di Unimus adalah program *Al-Islam dan Kemuhammadiyahan*. Kita belajar bagaimana menjadi individu yang bermanfaat bagi masyarakat."
-    l "Betul, Andi. Kita juga diajarkan pentingnya *fastabiqul khairat* atau berlomba-lomba dalam kebaikan."
+    a "Ospek di Unimus memang penuh tantangan, Nata. Tapi, kita akan belajar banyak di sini."
+    l "Kita akan menghadapi berbagai tantangan yang tidak hanya menguji pengetahuan, tapi juga karakter kita."
+    r "Semuanya akan lebih mudah jika kita saling mendukung. Jangan ragu untuk berbagi dan belajar bersama."
 
-    # Pemilihan Jurusan
+    # Pemilihan Jurusan dengan Narasi Lebih Detail
+    p "Nata, jurusan apa yang kamu pilih?"
+
     menu:
         "Teknik Informatika":
             $ ospek_tracker.add_ospek_points(2)
@@ -224,17 +229,16 @@ label start:
             $ ospek_tracker.add_ospek_points(1)
             $ ospek_tracker.set_major("Kesehatan")
             show nata at center
-            show rina at left
             r "Selamat datang di prodi Kesehatan! Islam juga mengajarkan pentingnya menjaga kesehatan tubuh dan jiwa."
             $ ospek_tracker.update_relationship("Rina", 1)
 
-    # Tantangan Kerja Tim
+    # Tantangan Kerja Tim dengan Narasi Mendalam
     scene bg student_center with dissolve
     play music challenge_theme fadein 2.0 loop
     show pak_budi at center
     show joko at right
 
-    p "Sekarang, tantangan kerja tim! Tantangan ini akan menguji nilai *ta'awun* atau saling tolong menolong."
+    p "Saatnya tantangan kerja tim! Di sini kita akan menguji nilai *ta'awun* (saling tolong-menolong) dan kepemimpinan. Pilihlah dengan bijak!"
 
     menu:
         "Ambil inisiatif memimpin tim":
@@ -242,23 +246,25 @@ label start:
             $ ospek_tracker.update_relationship("Joko", 1)
             $ ospek_tracker.update_relationship("Pak Budi", 2)
             show nata at left
-            e "Saya akan mengatur strategi agar tugas ini bisa selesai dengan baik."
-            p "Kepemimpinan itu adalah amanah, Nata. Bagus sekali, terus tingkatkan!"
+            e "Saya akan memimpin tim ini dan mengatur strategi agar tugas ini bisa selesai dengan baik."
+            p "Kepemimpinan itu adalah amanah. Bagus sekali, terus tingkatkan!"
+            j "Kerja tim yang solid membutuhkan kepemimpinan yang baik."
 
         "Fokus pada peran supportif":
             $ ospek_tracker.add_ospek_points(2)
             $ ospek_tracker.update_relationship("Andi", 1)
             $ ospek_tracker.update_relationship("Momogi", 1)
             show nata at left
-            e "Saya akan membantu teman-teman menyelesaikan tugas ini."
+            e "Saya akan mendukung teman-teman dalam menyelesaikan tugas ini."
             j "Kerja tim yang solid! Setiap kontribusi itu bernilai."
+            a "Kerjasama adalah kunci keberhasilan."
 
-    # Kuis Pengetahuan AIK
+    # Kuis Pengetahuan AIK dengan Struktur Lebih Kompleks
     scene bg lecture_room with dissolve
     play music quiz_theme fadein 2.0 loop
     show pak_budi at center
 
-    p "Sekarang, kita lanjutkan dengan kuis tentang nilai-nilai *Al-Islam dan Kemuhammadiyahan*."
+    p "Sekarang kita lanjutkan dengan kuis tentang nilai-nilai *Al-Islam dan Kemuhammadiyahan*. Siapkan dirimu!"
 
     $ answer = renpy.input("Apa arti dari 'fastabiqul khairat'?").strip()
     if answer.lower() in ["berlomba dalam kebaikan", "berlomba-lomba dalam kebaikan"]:
@@ -270,9 +276,9 @@ label start:
     else:
         show nata at right
         e "Hmm... Saya belum paham benar."
-        p "Tidak apa-apa, ini saatnya untuk belajar lebih dalam."
+        p "Tidak apa-apa, ini saatnya untuk belajar lebih dalam. Teruslah berusaha memahami nilai-nilai Islam."
 
-    # Penutupan
+    # Penutupan Ospek dengan Evaluasi Final
     scene bg ospek_hall with dissolve
     stop music fadeout 2.0
     play music end_theme fadein 2.0 loop
@@ -281,10 +287,13 @@ label start:
 
     if ospek_tracker.ospek_points >= 8:
         p "Luar biasa! Anda menunjukkan potensi luar biasa. Nilai-nilai Islam terlihat dalam tindakan Anda."
+        $ achievement = "Mahasiswa Inspiratif"
     elif ospek_tracker.ospek_points >= 5:
         p "Cukup baik. Tetaplah semangat dalam belajar dan berbuat kebaikan."
+        $ achievement = "Mahasiswa Berprestasi"
     else:
         p "Anda masih perlu belajar lebih banyak. Jangan berhenti berusaha."
+        $ achievement = "Perlu Pengembangan Diri"
 
     # Ringkasan Hubungan
     "Hubungan Pertemanan:"
@@ -294,7 +303,90 @@ label start:
             status = ospek_tracker.get_relationship_status(score)
             renpy.say(None, f"{character}: {status} (Skor: {score})")
 
+    show nata at center
+    e "Terima kasih, semuanya. Aku belajar banyak di ospek ini dan akan terus berusaha menjadi lebih baik."
+
+    p "Semoga perjalananmu di Unimus semakin membawa kebaikan. Teruskan perjuanganmu!"
+
+    # Akhir Game
+    scene bg welcome_night with dissolve
+    e "Ospek sudah selesai, tapi perjalanan aku di Unimus baru dimulai. Aku siap menghadapi tantangan yang lebih besar!"
+
     stop music fadeout 2.0
-    "Ospek Unimus: Babak Pertama Selesai."
+    "Ospek Unimus: Babak Pertama Selesai. [achievement]"
 
     return
+
+init python:
+    # Manajemen Lokasi
+    locations = {
+        "kampus_depan": {
+            "background": "images/campus_entrance.jpg",
+            "available_characters": ["nata", "andi", "momogi", "pak_budi"],
+            "music": audio.ospek_theme
+        },
+        "aula_ospek": {
+            "background": "images/ospek_main_hall.jpg", 
+            "available_characters": ["pak_budi", "joko", "rina"],
+            "music": audio.ospek_theme
+        },
+        "ruang_kuliah": {
+            "background": "images/lecture_room.jpg",
+            "available_characters": ["pak_budi", "andi", "rina"],
+            "music": audio.quiz_theme
+        },
+        "pusat_mahasiswa": {
+            "background": "images/student_center.jpg",
+            "available_characters": ["momogi", "joko", "andi"],
+            "music": audio.challenge_theme
+        }
+    }
+
+    def pindah_lokasi(lokasi):
+        """Fungsi untuk berpindah lokasi"""
+        if lokasi not in locations:
+            raise ValueError(f"Lokasi {lokasi} tidak ditemukan")
+        
+        renpy.scene()
+        renpy.show(locations[lokasi]["background"], at_list=[dissolve], zorder=0)
+        renpy.music.play(locations[lokasi]["music"], fadeout=1.0, fadein=1.0)
+
+    def pilih_karakter_di_lokasi(lokasi):
+        """Menampilkan daftar karakter di lokasi tertentu"""
+        if lokasi not in locations:
+            raise ValueError(f"Lokasi {lokasi} tidak ditemukan")
+        
+        return locations[lokasi]["available_characters"]
+
+# Label navigasi di luar blok init python
+label navigasi_bebas:
+    menu:
+        "Pilih Lokasi":
+            menu:
+                "Depan Kampus":
+                    $ pindah_lokasi("kampus_depan")
+                "Aula Ospek":
+                    $ pindah_lokasi("aula_ospek")
+                "Ruang Kuliah":
+                    $ pindah_lokasi("ruang_kuliah")
+                "Pusat Mahasiswa":
+                    $ pindah_lokasi("pusat_mahasiswa")
+                "Kembali":
+                    return
+
+        "Pilih Karakter untuk Berbicara":
+            menu:
+                "Depan Kampus":
+                    $ karakter_tersedia = pilih_karakter_di_lokasi("kampus_depan")
+                    menu:
+                        "[karakter_tersedia[0]]":
+                            $ show_character(karakter_tersedia[0])
+                            $ interact(karakter_tersedia[0], "Dialog bebas")
+                        "[karakter_tersedia[1]]":
+                            $ show_character(karakter_tersedia[1])
+                            $ interact(karakter_tersedia[1], "Dialog bebas lagi")
+                        "Kembali":
+                            jump navigasi_bebas
+
+        "Kembali ke Cerita":
+            return
