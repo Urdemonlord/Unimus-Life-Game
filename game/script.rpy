@@ -1197,7 +1197,10 @@ label day_loop:
     scene bg ospek_hall with dissolve
     show screen hud
 
-    "[ Hari [day] dari [ospek_tracker.total_ospek_days] ]"
+    # Perhatian: JANGAN menulis "[ Hari [day] ... ]" — kurung siku bersarang
+    # membuat Ren'Py mengevaluasi seluruh isinya sebagai ekspresi Python dan
+    # gagal dengan SyntaxError. Gunakan satu tingkat kurung saja.
+    "Hari [day] dari [ospek_tracker.total_ospek_days]"
 
     if ospek_tracker.stamina < ospek_tracker.LOW_STAMINA:
         show pak_budi at center
