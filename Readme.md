@@ -15,23 +15,30 @@ keputusan menentukan nilai akhir dan ending yang kamu dapatkan.
   utama; stamina habis memaksamu beristirahat.
 - **5 kegiatan harian** — seminar, lomba akademik, diskusi keagamaan, olahraga,
   membantu teman, dan istirahat.
+- **Event acak harian** — 10 kejadian tak terduga (sarapan bareng, kajian
+  singkat, nasihat dosen, dll.) yang memberi efek berbeda tiap kali bermain.
+- **Jalur cerita per jurusan** — event eksklusif di hari ke-4 untuk Teknik
+  Informatika (lab komputer), Manajemen (rapat/seminar), dan Kesehatan
+  (lab pertolongan pertama), plus dialog bernuansa jurusan.
 - **Kuis AIK multi-soal** — 5 soal Al-Islam & Kemuhammadiyahan dengan
   pembahasan tiap jawaban.
-- **Sistem hubungan** — skor kedekatan dengan 5 karakter (Andi, Momogi, Rina,
-  Joko, Pak Budi) beserta status hubungan (Baru Kenal → Sahabat Sejati).
+- **Sistem hubungan** — skor kedekatan dengan **8 karakter** (Andi, Momogi,
+  Rina, Joko, Pak Budi, Sari, Dimas, Bu Ratna) beserta status hubungan
+  (Baru Kenal → Sahabat Sejati).
 - **Statistik pemain** — leadership, discipline, religious_knowledge,
   academic_potential, stamina.
-- **Banyak ending** — ditentukan oleh poin ospek, total kedekatan, dan stat.
-- **Pencapaian (achievements)** — 10 pencapaian, mis. "Ahli AIK" (kuis
-  sempurna), "Jiwa Pemimpin" (leadership 90), dan "Sahabat <nama>"
-  (kedekatan 8). Bisa dibuka lewat tombol **Pencapaian ★** di HUD.
+- **6 ending berbeda** — ditentukan oleh poin ospek, total kedekatan, dan stat.
+- **Pencapaian (achievements)** — 16 pencapaian, mis. "Ahli AIK" (kuis
+  sempurna), "Jiwa Pemimpin" (leadership 90), "Calon Programmer" (jalur
+  Informatika), dan "Sahabat <nama>" (kedekatan 8). Bisa dibuka lewat tombol
+  **Pencapaian ★** di HUD.
 - **Catatan harian** — lihat rekap kegiatan tiap hari, baik saat bermain
   maupun di ringkasan akhir.
 - **Sahabat terdekat** — di akhir ospek ditampilkan teman yang paling
   dekat denganmu.
 - **HUD** — menampilkan hari, stamina, dan poin ospek selama permainan.
-- **Mode jelajah bebas** — pindah lokasi kampus dan mengobrol dengan karakter
-  (tersedia sebagai pilihan setiap hari).
+- **Mode jelajah bebas** — 7 lokasi kampus (depan kampus, aula, ruang kuliah,
+  pusat mahasiswa, kantin, perpustakaan, masjid) dan mengobrol dengan karakter.
 - **Antarmuka lintas platform** — desktop dan mobile (tata letak khusus ponsel).
 
 ## Persyaratan Sistem 💻
@@ -75,11 +82,33 @@ Unimus-Life-Game/
 
 ## Cara Bermain 🕹️
 
-- Setiap hari kamu memilih **satu kegiatan** dari menu.
+- Setiap hari kamu memilih **satu kegiatan** dari menu (atau menjelajah kampus).
 - Kegiatan menguras **stamina**; jika stamina < 20 kamu hanya bisa istirahat.
-- **Hari 3** ada kuis AIK, **Hari 5** ada tantangan kerja tim.
+- **Event acak** bisa terjadi setiap pagi, kecuali hari 3 & 5.
+- **Hari 3** kuis AIK · **Hari 4** event jalur jurusan · **Hari 5** tantangan tim.
 - Setelah **7 hari**, nilai akhir dan ending dihitung dari poin ospek, total
   kedekatan, dan statistikmu.
+
+## Mengganti Aset Gambar 🎨
+
+Semua background & sprite karakter baru saat ini adalah **placeholder buatan
+otomatis** (gradasi warna + label). Silakan ganti dengan gambar/foto asli —
+cukup timpa berkas dengan nama yang sama:
+
+| Berkas | Ukuran disarankan | Keterangan |
+|---|---|---|
+| `game/images/kantin.jpg` | 1920×1080 | Kantin kampus |
+| `game/images/perpustakaan.jpg` | 1920×1080 | Perpustakaan |
+| `game/images/masjid.jpg` | 1920×1080 | Masjid kampus |
+| `game/images/lab_komputer.jpg` | 1920×1080 | Lab komputer (jalur Informatika) |
+| `game/images/ruang_seminar.jpg` | 1920×1080 | Ruang seminar (jalur Manajemen) |
+| `game/images/lab_kesehatan.jpg` | 1920×1080 | Lab kesehatan (jalur Kesehatan) |
+| `game/images/characters/sari.png` | 1024×1024 (PNG transparan) | Sari (kakak senior) |
+| `game/images/characters/dimas.png` | 1024×1024 (PNG transparan) | Dimas (teman sekamar) |
+| `game/images/characters/bu_ratna.png` | 1024×1024 (PNG transparan) | Bu Ratna (dosen) |
+
+> Background: JPG 1920×1080. Karakter: PNG transparan 1024×1024, berdiri
+> dengan posisi di bagian bawah gambar.
 
 ## Berkontribusi 🛠️
 

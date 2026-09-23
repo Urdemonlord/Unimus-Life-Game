@@ -19,6 +19,10 @@ init python:
         "rina":     {"image": "rina",     "name": "Rina",     "rel": "Rina"},
         "joko":     {"image": "joko",     "name": "Joko",     "rel": "Joko"},
         "pak_budi": {"image": "pak_budi", "name": "Pak Budi", "rel": "Pak Budi"},
+        # --- karakter baru ---
+        "sari":     {"image": "sari",     "name": "Sari",     "rel": "Sari"},
+        "dimas":    {"image": "dimas",    "name": "Dimas",    "rel": "Dimas"},
+        "bu_ratna": {"image": "bu_ratna", "name": "Bu Ratna", "rel": "Bu Ratna"},
     }
 
     CHARACTER_DIALOGUES = {
@@ -26,28 +30,151 @@ init python:
             "Semangat, Nata! Ospek itu tempat kita tumbuh bersama.",
             "Kalau ada tugas kelompok, aku siap bantu kapan saja.",
             "Jangan lupa istirahat, kesehatan juga bagian dari ibadah.",
+            "Aku ikut organisasi kampus, di sana kita belajar memimpin.",
+            "Kita ini satu angkatan, jadi harus saling mengangkat, ya!",
         ],
         "momogi": [
             "Aku jauh dari rumah, tapi di sini aku belajar mandiri.",
             "Kita perantau harus saling menguatkan, ya!",
             "Cita-citaku besar, dan ospek ini langkah pertamanya.",
+            "Kangen rumah itu wajar, yang penting jangan menyerah.",
+            "Aku ingin membanggakan orang tua di kampung.",
         ],
         "rina": [
             "Menjaga kesehatan tubuh dan jiwa itu seimbang, Nata.",
             "Aku ikut kegiatan kemanusiaan, mau ikut suatu hari?",
             "Senyum itu sedekah, jadi jangan pelit senyum!",
+            "Kalau lelah, istirahatlah. Tubuh ini juga amanah.",
+            "Aku suka belajar tentang gizi dan kesehatan masyarakat.",
         ],
         "joko": [
             "Disiplin adalah kunci. Tanpa itu, ilmu sulit bermanfaat.",
             "Aku tegas bukan karena benci, tapi karena sayang.",
             "Nilai keagamaan harus jadi fondasi, bukan hiasan.",
+            "Senior itu tugasnya membimbing, bukan menakuti.",
+            "Jangan takut salah, takutlah kalau tidak mau belajar.",
         ],
         "pak_budi": [
             "Kepemimpinan adalah amanah, bukan sekadar jabatan.",
             "Teruslah belajar, karena ilmu itu cahaya.",
             "Jaga akhlak, maka ilmumu akan berkah.",
+            "Ospek bukan ajang balas dendam, tapi ajang pembentukan diri.",
+            "Pemimpin yang baik itu mendengar sebelum memutuskan.",
+        ],
+        "sari": [
+            "Hai! Aku Sari, mahasiswa tingkat atas. Ada yang bisa dibantu?",
+            "Ikut UKM itu penting, Nata. Bisa menambah pengalaman.",
+            "Dulu aku juga gugup saat ospek. Nanti pasti terbiasa.",
+            "Jangan sungkan bertanya ke senior, kami siap membantu.",
+        ],
+        "dimas": [
+            "Aku Dimas, teman sekamarmu. Kalau butuh apa-apa, bilang saja.",
+            "Bangun pagi itu berat, tapi kita bisa saling membangunkan!",
+            "Kita sekamar, jadi kita satu tim. Kompak, ya!",
+            "Aku suka begadang belajar, kamu jangan ikut-ikutan, nanti ngantuk di ospek.",
+        ],
+        "bu_ratna": [
+            "Selamat datang, Nata. Saya Bu Ratna, dosen pembimbing.",
+            "Belajar itu tidak mengenal usia, teruslah bertanya.",
+            "Akademik dan akhlak harus sejalan, itu pesan saya.",
+            "Jangan ragu datang ke ruang saya kalau ada kesulitan.",
         ],
     }
+
+    # --------------------------------------------------------------------- #
+    #  Event acak harian
+    # --------------------------------------------------------------------- #
+    #  Setiap tiba hari baru, satu event acak dijalankan (bisa "none").
+    #  Jenis:
+    #    "rel"  -> ubah kedekatan karakter (kunci "char", "amount")
+    #    "stat" -> ubah statistik        (kunci "stat", "amount")
+    #    "points" -> tambah poin ospek   (kunci "amount")
+    #    "scene"  -> tampilkan narasi + karakter + efek
+    # --------------------------------------------------------------------- #
+    RANDOM_EVENTS = [
+        {
+            "id": "sapa_pagi",
+            "scene": "bg kampus_depan",
+            "speaker": "andi", "position": "center",
+            "line": "Nata! Ayo jalan bareng ke aula, jangan sampai telat lagi.",
+            "narration": "Andi menyapamu dengan semangat di depan kampus.",
+            "rel": {"char": "Andi", "amount": 1},
+        },
+        {
+            "id": "buku_tertinggal",
+            "scene": "bg perpustakaan",
+            "speaker": "momogi", "position": "center",
+            "line": "Aku pinjamkan catatanku, Nata. Belajar bareng yuk!",
+            "narration": "Momogi berbagi catatan di perpustakaan.",
+            "stat": {"stat": "academic_potential", "amount": 4},
+        },
+        {
+            "id": "jemur_pagi",
+            "scene": "bg kampus_depan",
+            "speaker": "dimas", "position": "center",
+            "line": "Udah sarapan? Aku bawain gorengan nih, kita makan bareng.",
+            "narration": "Dimas mengajakmu sarapan bersama.",
+            "stat": {"stat": "stamina", "amount": 8},
+        },
+        {
+            "id": "tegur_senior",
+            "scene": "bg ospek_hall",
+            "speaker": "sari", "position": "center",
+            "line": "Hari ini barisanmu paling rapi. Bagus, pertahankan!",
+            "narration": "Kak Sari memberi pujian atas kedisiplinanmu.",
+            "stat": {"stat": "discipline", "amount": 5},
+        },
+        {
+            "id": "kajian_singkat",
+            "scene": "bg masjid",
+            "speaker": "joko", "position": "center",
+            "line": "Sebelum mulai, mari kita renungkan sejenak ayat hari ini.",
+            "narration": "Joko mengajakmu kajian singkat di masjid kampus.",
+            "rel": {"char": "Joko", "amount": 1},
+            "stat": {"stat": "religious_knowledge", "amount": 6},
+        },
+        {
+            "id": "tips_dosen",
+            "scene": "bg ruang_seminar",
+            "speaker": "bu_ratna", "position": "center",
+            "line": "Nata, saya lihat kamu rajin. Ini tips belajar yang bisa kamu coba.",
+            "narration": "Bu Ratna memberi nasihat belajar.",
+            "stat": {"stat": "academic_potential", "amount": 6},
+        },
+        {
+            "id": "bantu_bawa",
+            "scene": "bg kantin",
+            "speaker": "rina", "position": "center",
+            "line": "Tumben, kamu mau bantu aku bawa perlengkapan? Terima kasih!",
+            "narration": "Kamu membantu Rina membawa perlengkapan kegiatan.",
+            "rel": {"char": "Rina", "amount": 1},
+        },
+        {
+            "id": "tugas_tambahan",
+            "scene": "bg lecture_room",
+            "speaker": "pak_budi", "position": "center",
+            "line": "Karena kamu proaktif, saya beri kamu tugas kecil. Bisa?",
+            "narration": "Pak Budi memberimu tugas tambahan kepercayaan.",
+            "points": {"amount": 2},
+        },
+        {
+            "id": "kantin_rame",
+            "scene": "bg kantin",
+            "speaker": "momogi", "position": "center",
+            "line": "Kantin penuh! Sini, aku sudah pesankan tempat untuk kita.",
+            "narration": "Kamu makan siang bersama teman-teman di kantin.",
+            "rel": {"char": "Momogi", "amount": 1},
+        },
+        {
+            "id": "olahraga_pagi",
+            "scene": "bg kampus_depan",
+            "speaker": "andi", "position": "center",
+            "line": "Ayo jogging dulu sebelum ospek, biar badan segar!",
+            "narration": "Kamu berolahraga pagi bersama Andi.",
+            "stat": {"stat": "stamina", "amount": 6},
+            "rel": {"char": "Andi", "amount": 1},
+        },
+    ]
 
     POSITION_XALIGN = {"left": 0.0, "center": 0.5, "right": 1.0}
 
@@ -204,6 +331,12 @@ init python:
         "Rina_close_friend":          ("Sahabat Rina", "Kedekatan dengan Rina mencapai 8."),
         "Joko_close_friend":          ("Sahabat Joko", "Kedekatan dengan Joko mencapai 8."),
         "Pak Budi_close_friend":      ("Dekat dengan Pak Budi", "Kedekatan dengan Pak Budi mencapai 8."),
+        "Sari_close_friend":          ("Dekat dengan Kak Sari", "Kedekatan dengan Sari mencapai 8."),
+        "Dimas_close_friend":         ("Sahabat Sekamar", "Kedekatan dengan Dimas mencapai 8."),
+        "Bu Ratna_close_friend":      ("Dibimbing Bu Ratna", "Kedekatan dengan Bu Ratna mencapai 8."),
+        "jalur_informatika":          ("Calon Programmer", "Menyelesaikan tantangan jalur Teknik Informatika."),
+        "jalur_manajemen":            ("Calon Pemimpin", "Menyelesaikan tantangan jalur Manajemen."),
+        "jalur_kesehatan":            ("Calon Tenaga Kesehatan", "Menyelesaikan tantangan jalur Kesehatan."),
     }
 
     # --------------------------------------------------------------------- #
@@ -224,6 +357,9 @@ init python:
                 "Rina":     {"score": 0, "background": "Aktivis kesehatan dan kemanusiaan"},
                 "Joko":     {"score": 0, "background": "Senior tegas dengan nilai keagamaan kuat"},
                 "Pak Budi": {"score": 0, "background": "Pembimbing spiritual dengan pengalaman luas"},
+                "Sari":     {"score": 0, "background": "Kakak senior yang ramah dan suka membantu"},
+                "Dimas":    {"score": 0, "background": "Teman sekamar yang ceria dan solid"},
+                "Bu Ratna": {"score": 0, "background": "Dosen pembimbing yang bijaksana"},
             }
 
             self.stats = {
@@ -241,6 +377,7 @@ init python:
             self.daily_schedule = []
             self.conflicts = []
             self.day_log = []          # catatan aktivitas tiap hari
+            self.event_log = []        # id event acak yang pernah terjadi
 
             self.current_day = 1
             self.total_ospek_days = 7
@@ -395,6 +532,21 @@ init python:
                 return None
             return (name, data["score"])
 
+        def apply_random_event(self, event):
+            """Terapkan efek satu event acak (dict dari RANDOM_EVENTS)."""
+            if not event:
+                return
+            rel = event.get("rel")
+            if rel:
+                self.update_relationship(rel["char"], rel["amount"])
+            stat = event.get("stat")
+            if stat:
+                self.update_stat(stat["stat"], stat["amount"])
+            points = event.get("points")
+            if points:
+                self.add_ospek_points(points["amount"])
+            self.event_log.append(event.get("id", "event"))
+
         # ---------------------------------------------------------------- #
         #  Kuis
         # ---------------------------------------------------------------- #
@@ -466,7 +618,7 @@ init python:
                     "ENDING: MAHASISWA BERPRESTASI",
                     "Kamu aktif dan berprestasi selama ospek. Terus pertahankan!",
                 )
-            if pts >= 6:
+            if pts >= 8:
                 return (
                     "ENDING: MAHASISWA POTENSIAL",
                     "Kamu menunjukkan potensi yang baik. Masih banyak ruang untuk tumbuh.",
@@ -503,6 +655,10 @@ define l = Character("Momogi", who_color="#e74c3c")
 define p = Character("Pak Budi", who_color="#f39c12")
 define r = Character("Rina", who_color="#9b59b6")
 define j = Character("Joko", who_color="#1abc9c")
+# --- karakter baru ---
+define s = Character("Sari", who_color="#e67e22")
+define d = Character("Dimas", who_color="#16a085")
+define br = Character("Bu Ratna", who_color="#8e44ad")
 
 # ------------------------------------------------------------------------- #
 #  Gambar karakter
@@ -513,6 +669,10 @@ image momogi = "images/characters/momogi.png"
 image pak_budi = "images/characters/pak_budi.png"
 image rina = "images/characters/rina.png"
 image joko = "images/characters/joko.png"
+# --- karakter baru ---
+image sari = "images/characters/sari.png"
+image dimas = "images/characters/dimas.png"
+image bu_ratna = "images/characters/bu_ratna.png"
 
 # ------------------------------------------------------------------------- #
 #  Background & audio
@@ -527,6 +687,14 @@ image bg kampus_depan = "images/campus_entrance.jpg"
 image bg aula_ospek = "images/ospek_main_hall.jpg"
 image bg ruang_kuliah = "images/lecture_room.jpg"
 image bg pusat_mahasiswa = "images/student_center.jpg"
+
+# --- background baru (placeholder, silakan ganti dengan foto asli) ---
+image bg kantin = "images/kantin.jpg"
+image bg perpustakaan = "images/perpustakaan.jpg"
+image bg masjid = "images/masjid.jpg"
+image bg lab_komputer = "images/lab_komputer.jpg"
+image bg ruang_seminar = "images/ruang_seminar.jpg"
+image bg lab_kesehatan = "images/lab_kesehatan.jpg"
 
 define audio.ospek_theme = "audio/ospek_welcome.mp3"
 define audio.challenge_theme = "audio/challenge_theme.mp3"
@@ -667,6 +835,20 @@ label start:
     p "Baiklah. Ospek berlangsung selama 7 hari. Aturlah tenagamu dengan bijak — setiap hari kamu hanya bisa melakukan satu kegiatan utama."
     hide pak_budi
 
+    # Sapaan singkat bernuansa jurusan
+    if ospek_tracker.current_major == "Teknik Informatika":
+        show andi at center
+        a "Sebagai anak Informatika, kita akan banyak berkutat di lab komputer. Siap?"
+        hide andi
+    elif ospek_tracker.current_major == "Manajemen":
+        show momogi at center
+        l "Anak Manajemen harus siap memimpin. Kita akan banyak berlatih presentasi!"
+        hide momogi
+    elif ospek_tracker.current_major == "Kesehatan":
+        show rina at center
+        r "Anak Kesehatan akan belajar banyak di lab. Ilmu kita untuk menolong sesama."
+        hide rina
+
     jump day_loop
 
 
@@ -688,6 +870,11 @@ label day_loop:
         show pak_budi at center
         p "Kamu terlihat lelah, Nata. Sebaiknya istirahat dulu hari ini agar tidak tumbang."
         hide pak_budi
+
+    # Event acak (tidak pada hari event utama 3 & 5)
+    if day != 3 and day != 5:
+        call random_event
+        show screen hud
 
     menu:
         "Pilih kegiatan hari ini":
@@ -724,10 +911,11 @@ label day_activity:
     if _result["ok"]:
         $ _act = _result["activity"]
         $ _text = _act["result"]
+        $ _gain = _act["points"]
         scene bg lecture_room with dissolve
         "[_text]"
         hide screen hud
-        $ renpy.say(None, "Poin ospek: +[_act[points]]")
+        $ renpy.say(None, "Poin ospek: +{}".format(_gain))
         show screen hud
     else:
         "Tenagamu tidak cukup untuk kegiatan itu. Kamu memilih beristirahat."
@@ -735,6 +923,8 @@ label day_activity:
     # ---------------- Event khusus per hari ---------------- #
     if day == 3:
         call kuis_aik
+    elif day == 4:
+        call jalur_jurusan
     elif day == 5:
         call tantangan_tim
 
@@ -816,6 +1006,91 @@ label tantangan_tim:
 
 
 # ------------------------------------------------------------------------- #
+#  Event acak harian
+# ------------------------------------------------------------------------- #
+label random_event:
+    python:
+        _ev = random.choice(RANDOM_EVENTS)
+        ospek_tracker.apply_random_event(_ev)
+    $ _ev_scene = _ev["scene"]
+    $ _ev_speaker = CHARACTER_INFO[_ev["speaker"]]["name"]
+    $ _ev_line = _ev["line"]
+    $ _ev_narr = _ev["narration"]
+    scene expression _ev_scene with dissolve
+    "[_ev_narr]"
+    $ show_character(_ev["speaker"], "center")
+    "[_ev_speaker] \"[_ev_line]\""
+    python:
+        for _k in ("sari", "dimas", "bu_ratna", "andi", "momogi", "rina", "joko", "pak_budi"):
+            renpy.hide(CHARACTER_INFO[_k]["image"])
+    return
+
+
+# ------------------------------------------------------------------------- #
+#  Jalur cerita per jurusan (event eksklusif hari ke-4)
+# ------------------------------------------------------------------------- #
+label jalur_jurusan:
+    if ospek_tracker.current_major == "Teknik Informatika":
+        call jalur_informatika
+    elif ospek_tracker.current_major == "Manajemen":
+        call jalur_manajemen
+    elif ospek_tracker.current_major == "Kesehatan":
+        call jalur_kesehatan
+    return
+
+
+label jalur_informatika:
+    scene bg lab_komputer with dissolve
+    play music challenge_theme fadein 2.0 loop
+    show andi at center
+    a "Nata, di lab ini kita belajar membuat aplikasi sederhana. Mau coba?"
+    e "Tentu! Aku penasaran bagaimana teknologi bisa membantu banyak orang."
+    python:
+        ospek_tracker.update_relationship("Andi", 2)
+        ospek_tracker.update_stat("academic_potential", 8)
+        ospek_tracker.add_ospek_points(3)
+        ospek_tracker.add_achievement("jalur_informatika")
+    a "Kode yang baik itu bukan yang pintar, tapi yang mudah dipahami orang lain."
+    "Kamu menghabiskan hari itu dengan menyusun program pertamamu. Rasanya melelahkan tapi menyenangkan."
+    hide andi
+    return
+
+
+label jalur_manajemen:
+    scene bg ruang_seminar with dissolve
+    play music challenge_theme fadein 2.0 loop
+    show momogi at center
+    l "Nata, kita diminta memimpin rapat kecil. Berani mencoba?"
+    e "Ayo! Aku ingin belajar bagaimana mengatur tim dengan baik."
+    python:
+        ospek_tracker.update_relationship("Momogi", 2)
+        ospek_tracker.update_stat("leadership", 8)
+        ospek_tracker.add_ospek_points(3)
+        ospek_tracker.add_achievement("jalur_manajemen")
+    l "Pemimpin yang baik itu mendengar dulu, baru memutuskan. Kamu sudah melakukannya!"
+    "Kamu memimpin rapat dengan tenang, mendengar setiap pendapat, lalu mengambil kesimpulan."
+    hide momogi
+    return
+
+
+label jalur_kesehatan:
+    scene bg lab_kesehatan with dissolve
+    play music challenge_theme fadein 2.0 loop
+    show rina at center
+    r "Nata, di lab ini kita belajar pertolongan pertama. Ini penting untuk menolong sesama."
+    e "Aku siap. Ilmu ini pasti berguna, bukan hanya untuk diriku sendiri."
+    python:
+        ospek_tracker.update_relationship("Rina", 2)
+        ospek_tracker.update_stat("discipline", 8)
+        ospek_tracker.add_ospek_points(3)
+        ospek_tracker.add_achievement("jalur_kesehatan")
+    r "Menjaga kesehatan itu bagian dari menjaga amanah dari Allah. Kamu sudah paham."
+    "Kamu berlatih pertolongan pertama dengan sungguh-sungguh. Rasanya bermanfaat."
+    hide rina
+    return
+
+
+# ------------------------------------------------------------------------- #
 #  Evaluasi akhir
 # ------------------------------------------------------------------------- #
 label final_evaluation:
@@ -857,7 +1132,7 @@ label final_evaluation:
 
     python:
         _ach_count = len(ospek_tracker.achievement_list())
-    "Pencapaian yang kamu raih: [_ach_count] dari 10."
+    "Pencapaian yang kamu raih: [_ach_count] dari 16."
     if _ach_count:
         $ renpy.say(None, "Tekan tombol Pencapaian ★ pada HUD untuk melihat detailnya.")
 
@@ -909,6 +1184,24 @@ init python:
             "available_characters": ["momogi", "joko", "andi"],
             "music": "audio/challenge_theme.mp3",
         },
+        "kantin": {
+            "name": "Kantin Kampus",
+            "background": "bg kantin",
+            "available_characters": ["dimas", "rina", "momogi"],
+            "music": "audio/ospek_welcome.mp3",
+        },
+        "perpustakaan": {
+            "name": "Perpustakaan",
+            "background": "bg perpustakaan",
+            "available_characters": ["momogi", "bu_ratna", "andi"],
+            "music": "audio/quiz_theme.mp3",
+        },
+        "masjid": {
+            "name": "Masjid Kampus",
+            "background": "bg masjid",
+            "available_characters": ["joko", "pak_budi", "rina"],
+            "music": "audio/ospek_welcome.mp3",
+        },
     }
 
     def pindah_lokasi(lokasi):
@@ -956,19 +1249,19 @@ label pilih_lokasi:
 label pilih_karakter:
     python:
         _all = []
+        _seen = set()
         for _lk, _lv in LOCATIONS.items():
             for _cid in _lv["available_characters"]:
-                if _cid == "nata":
+                if _cid == "nata" or _cid in _seen:
                     continue
+                _seen.add(_cid)
                 _all.append(("{}  —  {}".format(CHARACTER_INFO[_cid]["name"], _lv["name"]), _cid))
         _all.append(("Kembali", None))
         _cid = renpy.display_menu(_all)
     if _cid is not None:
         $ show_character(_cid, "center")
         $ interact(_cid)
-        hide andi
-        hide momogi
-        hide rina
-        hide joko
-        hide pak_budi
+        python:
+            for _k in ("andi", "momogi", "rina", "joko", "pak_budi", "sari", "dimas", "bu_ratna"):
+                renpy.hide(CHARACTER_INFO[_k]["image"])
     return
