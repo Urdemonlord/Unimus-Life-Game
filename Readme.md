@@ -27,10 +27,24 @@ keputusan menentukan nilai akhir dan ending yang kamu dapatkan.
   (Baru Kenal → Sahabat Sejati).
 - **Statistik pemain** — leadership, discipline, religious_knowledge,
   academic_potential, stamina.
-- **6 ending berbeda** — ditentukan oleh poin ospek, total kedekatan, dan stat.
-- **Pencapaian (achievements)** — 16 pencapaian, mis. "Ahli AIK" (kuis
+- **Sistem konflik antar-teman** — 4 konflik (pembagian tugas, salah paham,
+  candaan berlebihan, kecemburuan prestasi) di hari 6 & 7. Tiap konflik punya
+  3 cara penyelesaian dengan dampak berbeda pada kedekatan, statistik, dan
+  poin. Konflik yang gagal diselesaikan menutup ending terbaik.
+- **3 mini-game** — **susun yel-yel** (acak kata jadi yel-yel), **teka-teki
+  logika Islami** (jawaban angka), dan **tebak lanjutan ayat/hadis** (pilihan
+  ganda). Semua memberi poin ospek dan menaikkan statistik.
+- **Sistem nilai & ranking** — rapor ospek dengan 5 kategori (Poin Ospek,
+  Kedekatan, Kuis AIK, Mini-game, Konflik) dan skor akhir 0–100. Kamu
+  dibandingkan dengan 6 peserta lain di **papan skor** (tombol **Papan Skor 🏆**
+  di HUD). Bertanding ketat — juara umum tidak mudah diraih.
+- **6 ending berbeda** — ditentukan oleh poin ospek, total kedekatan, stat, dan
+  seberapa baik konflik diselesaikan. Setiap gaya bermain (akademik, sosial,
+  pasif, seimbang) menghasilkan ending yang berbeda.
+- **Pencapaian (achievements)** — 20 pencapaian, mis. "Ahli AIK" (kuis
   sempurna), "Jiwa Pemimpin" (leadership 90), "Calon Programmer" (jalur
-  Informatika), dan "Sahabat <nama>" (kedekatan 8). Bisa dibuka lewat tombol
+  Informatika), "Juara Mini-game", "Pendamai", "Juara Umum Ospek", dan
+  "Sahabat <nama>" (kedekatan 8). Bisa dibuka lewat tombol
   **Pencapaian ★** di HUD.
 - **Catatan harian** — lihat rekap kegiatan tiap hari, baik saat bermain
   maupun di ringkasan akhir.
@@ -84,10 +98,13 @@ Unimus-Life-Game/
 
 - Setiap hari kamu memilih **satu kegiatan** dari menu (atau menjelajah kampus).
 - Kegiatan menguras **stamina**; jika stamina < 20 kamu hanya bisa istirahat.
-- **Event acak** bisa terjadi setiap pagi, kecuali hari 3 & 5.
+- **Event acak** bisa terjadi setiap pagi, kecuali hari 3, 5, 6 & 7.
 - **Hari 3** kuis AIK · **Hari 4** event jalur jurusan · **Hari 5** tantangan tim.
+- **Hari 6** konflik antar-teman + sesi mini-game (yel-yel, teka-teki, ayat).
+- **Hari 7** konflik terakhir, lalu evaluasi akhir.
 - Setelah **7 hari**, nilai akhir dan ending dihitung dari poin ospek, total
-  kedekatan, dan statistikmu.
+  kedekatan, statistik, dan hasil penyelesaian konflik.
+- Buka **Pencapaian ★** dan **Papan Skor 🏆** kapan saja lewat tombol di HUD.
 
 ## Mengganti Aset Gambar 🎨
 

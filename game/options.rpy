@@ -13,7 +13,7 @@ define config.name = _("Unimus Life Game")
 define gui.show_name = True
 
 ## The version of the game.
-define config.version = "0.3.0"
+define config.version = "0.4.0"
 
 ## Text that is placed on the game's about screen.
 define gui.about = _p("""

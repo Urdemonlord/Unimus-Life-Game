@@ -176,6 +176,198 @@ init python:
         },
     ]
 
+    # --------------------------------------------------------------------- #
+    #  Sistem konflik antar-teman
+    # --------------------------------------------------------------------- #
+    #  Setiap opsi: "rel" = {nama: delta}, "points" = poin, "stat" = {stat: delta}
+    #  "resolved" = True berarti konflik terselesaikan dengan baik.
+    CONFLICTS = {
+        "tugas_tidak_adil": {
+            "title": "Pembagian Tugas Tidak Adil",
+            "scene": "bg pusat_mahasiswa",
+            "intro": "Tugas kelompok menumpuk padamu, sementara Andi dan Joko terlihat santai.",
+            "speaker": "andi",
+            "line": "Santai saja, Nata. Kan kamu yang paling bisa.",
+            "options": [
+                {
+                    "text": "Bicara baik-baik dan bagi tugas ulang",
+                    "reply": "Kamu benar, aku kurang peka. Ayo kita bagi ulang!",
+                    "rel": {"Andi": 2, "Joko": 1}, "points": 2,
+                    "stat": {"leadership": 5}, "resolved": True,
+                    "outcome": "Kamu menyelesaikan konflik dengan komunikasi terbuka.",
+                },
+                {
+                    "text": "Diam saja dan kerjakan semuanya sendiri",
+                    "reply": "Ya sudah, kalau kamu memang mau begitu.",
+                    "rel": {"Andi": -1}, "points": 1,
+                    "stat": {"stamina": -10}, "resolved": False,
+                    "outcome": "Tugas selesai, tapi kamu kelelahan dan menyimpan kesal.",
+                },
+                {
+                    "text": "Marah dan meninggalkan ruangan",
+                    "reply": "Nata, kenapa kamu jadi begitu?",
+                    "rel": {"Andi": -2, "Joko": -1}, "points": 0,
+                    "stat": {}, "resolved": False,
+                    "outcome": "Kamu pergi dengan marah. Hubungan jadi renggang.",
+                },
+            ],
+        },
+        "salah_paham": {
+            "title": "Salah Paham dengan Rina",
+            "scene": "bg kantin",
+            "intro": "Kamu mendengar Rina membicarakanmu, padahal ia sedang membantumu.",
+            "speaker": "rina",
+            "line": "Aku tadi bilang ke Bu Ratna kalau kamu butuh bantuan...",
+            "options": [
+                {
+                    "text": "Tanya langsung apa maksudnya",
+                    "reply": "Oh, kamu salah dengar! Aku justru membelamu di depan dosen.",
+                    "rel": {"Rina": 2}, "points": 2,
+                    "stat": {"discipline": 3}, "resolved": True,
+                    "outcome": "Kamu memilih klarifikasi dulu daripada berprasangka.",
+                },
+                {
+                    "text": "Menjauh tanpa bertanya",
+                    "reply": "Nata? Kenapa kamu diam saja?",
+                    "rel": {"Rina": -1}, "points": 0,
+                    "stat": {}, "resolved": False,
+                    "outcome": "Salah paham itu tidak pernah terselesaikan.",
+                },
+            ],
+        },
+        "ejekan_senior": {
+            "title": "Candaan yang Terlalu Jauh",
+            "scene": "bg ospek_hall",
+            "intro": "Seorang peserta lain mengejek cara kamu berpenampilan di depan banyak orang.",
+            "speaker": "dimas",
+            "line": "Nata, jangan didiemin. Kalau kamu mau, aku temani bicara.",
+            "options": [
+                {
+                    "text": "Tegur dengan sopan dan tenang",
+                    "reply": "Maaf, aku memang keterlaluan. Tidak akan kuulangi.",
+                    "rel": {"Dimas": 1, "Sari": 1}, "points": 2,
+                    "stat": {"leadership": 4, "discipline": 3}, "resolved": True,
+                    "outcome": "Kamu menegur tanpa kehilangan adab. Kamu dihormati karena itu.",
+                },
+                {
+                    "text": "Balas dengan ejekan juga",
+                    "reply": "Sudah, sudah! Kalian ini peserta ospek, bukan preman!",
+                    "rel": {"Sari": -1, "Dimas": -1}, "points": 0,
+                    "stat": {}, "resolved": False,
+                    "outcome": "Keributan kecil terjadi dan Kak Sari harus melerai.",
+                },
+                {
+                    "text": "Diamkan saja dan biarkan lewat",
+                    "reply": "Sudah, jangan dipikirin. Tapi lain kali lapor, ya.",
+                    "rel": {"Dimas": 1}, "points": 1,
+                    "stat": {"discipline": 2}, "resolved": False,
+                    "outcome": "Kamu memilih sabar. Perasaanmu tidak enak, tapi situasi aman.",
+                },
+            ],
+        },
+        "iri_prestasi": {
+            "title": "Kecemburuan atas Prestasimu",
+            "scene": "bg ruang_seminar",
+            "intro": "Joko terlihat kesal karena kamu dipuji Pak Budi di depan kelas.",
+            "speaker": "joko",
+            "line": "Enak ya, selalu dapat pujian. Kamu pasti disayang dosen.",
+            "options": [
+                {
+                    "text": "Akui kerja keras Joko juga",
+                    "reply": "Terima kasih, Nata. Aku memang sedang merasa tidak cukup baik.",
+                    "rel": {"Joko": 2, "Pak Budi": 1}, "points": 2,
+                    "stat": {"leadership": 3}, "resolved": True,
+                    "outcome": "Kamu merendahkan hati dan mengangkat temanmu sendiri.",
+                },
+                {
+                    "text": "Membanggakan diri sendiri",
+                    "reply": "Ya, karena aku memang berusaha lebih keras.",
+                    "rel": {"Joko": -2}, "points": 0,
+                    "stat": {}, "resolved": False,
+                    "outcome": "Joko menjauh. Persaingan yang tidak sehat mulai tumbuh.",
+                },
+            ],
+        },
+    }
+
+    # --------------------------------------------------------------------- #
+    #  Mini-game
+    # --------------------------------------------------------------------- #
+    #  1) Yel-yel: susun kata acak menjadi yel-yel yang benar.
+    YELL_PHRASES = [
+        "OSPEK UNIMUS SEMANGAT TERUS",
+        "TAWAUN KUNCI KEBERHASILAN KITA",
+        "DISIPLIN ILMU AMAL BERSAMA",
+    ]
+
+    #  2) Teka-teki logika Islami (jawaban berupa angka, dihitung).
+    RIDDLES = [
+        {
+            "question": "Dalam sehari, berapa kali kita menunaikan salat fardu?",
+            "answer": 5,
+            "hint": "Subuh, Zuhur, Asar, Magrib, Isya.",
+            "explain": "Salat fardu ada 5 waktu dalam sehari.",
+        },
+        {
+            "question": "Berapa jumlah rakaat salat Magrib?",
+            "answer": 3,
+            "hint": "Lebih sedikit dari Zuhur.",
+            "explain": "Salat Magrib berjumlah 3 rakaat.",
+        },
+        {
+            "question": "Berapa jumlah rukun Islam?",
+            "answer": 5,
+            "hint": "Sama dengan jumlah salat fardu.",
+            "explain": "Rukun Islam ada 5: syahadat, salat, zakat, puasa, haji.",
+        },
+    ]
+
+    #  3) Tebak ayat/hadits: pilih lanjutan yang benar.
+    AYAT_QUESTIONS = [
+        {
+            "q": "Lanjutan dari \"Fa inna ma'al usri...\" adalah?",
+            "options": ["Yusra", "Sabra", "Amra", "Khair"],
+            "answer": 0,
+            "explain": "\"Fa inna ma'al usri yusra\" — sesungguhnya bersama kesulitan ada kemudahan (QS. Al-Insyirah: 6).",
+        },
+        {
+            "q": "\"Innamal a'malu binniyat\" artinya?",
+            "options": [
+                "Sesungguhnya amal itu tergantung niatnya",
+                "Sesungguhnya sabar itu indah",
+                "Sesungguhnya ilmu itu cahaya",
+                "Sesungguhnya sedekah itu berkah",
+            ],
+            "answer": 0,
+            "explain": "Hadis riwayat Bukhari-Muslim: setiap amal tergantung niatnya.",
+        },
+        {
+            "q": "\"Man jadda wa jada\" artinya?",
+            "options": [
+                "Barang siapa bersungguh-sungguh, ia akan berhasil",
+                "Barang siapa bersabar, ia akan mulia",
+                "Barang siapa belajar, ia akan pintar",
+                "Barang siapa bersedekah, ia akan kaya",
+            ],
+            "answer": 0,
+            "explain": "Pepatah: siapa bersungguh-sungguh pasti akan berhasil.",
+        },
+    ]
+
+    # --------------------------------------------------------------------- #
+    #  Data peserta lain (untuk papan skor / ranking)
+    # --------------------------------------------------------------------- #
+    #  Skor tetap supaya pemain bisa membandingkan posisinya.
+    #  Dikalibrasi terhadap rata-rata skor pemain (~50) agar persaingan ketat.
+    OTHER_PARTICIPANTS = [
+        {"name": "Rizky",  "base": 62},
+        {"name": "Salma",  "base": 55},
+        {"name": "Fajar",  "base": 47},
+        {"name": "Nabila", "base": 39},
+        {"name": "Hendra", "base": 30},
+        {"name": "Tiara",  "base": 21},
+    ]
+
     POSITION_XALIGN = {"left": 0.0, "center": 0.5, "right": 1.0}
 
     def show_character(char_id, position="center"):
@@ -337,6 +529,10 @@ init python:
         "jalur_informatika":          ("Calon Programmer", "Menyelesaikan tantangan jalur Teknik Informatika."),
         "jalur_manajemen":            ("Calon Pemimpin", "Menyelesaikan tantangan jalur Manajemen."),
         "jalur_kesehatan":            ("Calon Tenaga Kesehatan", "Menyelesaikan tantangan jalur Kesehatan."),
+        "minigame_sempurna":          ("Juara Mini-game", "Mendapat skor sempurna di semua mini-game."),
+        "pendamai":                   ("Pendamai", "Menyelesaikan semua konflik dengan damai."),
+        "peringkat_1":                ("Juara Umum Ospek", "Meraih peringkat 1 pada papan skor akhir."),
+        "peringkat_3":                ("Papan Atas", "Meraih peringkat 3 besar pada papan skor akhir."),
     }
 
     # --------------------------------------------------------------------- #
@@ -378,6 +574,19 @@ init python:
             self.conflicts = []
             self.day_log = []          # catatan aktivitas tiap hari
             self.event_log = []        # id event acak yang pernah terjadi
+
+            # --- gameplay baru ---
+            self.conflict_log = []     # {id, choice, resolved}
+            self.minigame_scores = {   # skor tiap mini-game
+                "yel_yel": 0,
+                "teka_teki": 0,
+                "ayat": 0,
+            }
+            self.minigame_max = {
+                "yel_yel": 3,
+                "teka_teki": 3,
+                "ayat": 3,
+            }
 
             self.current_day = 1
             self.total_ospek_days = 7
@@ -456,9 +665,122 @@ init python:
                     result.append((key.replace("_", " ").title(), ""))
             return result
 
+        def achievement_max(self):
+            """Jumlah maksimum pencapaian yang mungkin diraih.
+
+            Sebagian pencapaian dibuat otomatis ("{nama}_close_friend",
+            "master_{stat}") dan sebagian sudah terdaftar di ACHIEVEMENT_INFO.
+            Ambil gabungannya supaya tidak terhitung dua kali.
+            """
+            mungkin = set(ACHIEVEMENT_INFO)
+            mungkin |= {"{}_close_friend".format(c) for c in self.friend_relationship}
+            mungkin |= {"master_{}".format(s) for s in self.stats if s != "stamina"}
+            return len(mungkin)
+
         def add_conflict(self, conflict_description):
             if conflict_description not in self.conflicts:
                 self.conflicts.append(conflict_description)
+
+        # ---------------------------------------------------------------- #
+        #  Konflik antar-teman
+        # ---------------------------------------------------------------- #
+        def resolve_conflict(self, conflict_id, option_index):
+            """Terapkan pilihan pemain pada sebuah konflik."""
+            conflict = CONFLICTS[conflict_id]
+            if not (0 <= option_index < len(conflict["options"])):
+                raise ValueError("Opsi konflik tidak valid: {}".format(option_index))
+            option = conflict["options"][option_index]
+
+            for char, delta in option.get("rel", {}).items():
+                self.update_relationship(char, delta)
+            for stat, delta in option.get("stat", {}).items():
+                self.update_stat(stat, delta)
+            self.add_ospek_points(option.get("points", 0))
+
+            resolved = option.get("resolved", False)
+            self.conflict_log.append({
+                "id": conflict_id,
+                "title": conflict["title"],
+                "choice": option["text"],
+                "resolved": resolved,
+            })
+            self.add_conflict(conflict["title"])
+            return resolved
+
+        def conflicts_resolved(self):
+            return sum(1 for c in self.conflict_log if c["resolved"])
+
+        def conflicts_total(self):
+            return len(self.conflict_log)
+
+        # ---------------------------------------------------------------- #
+        #  Mini-game
+        # ---------------------------------------------------------------- #
+        def add_minigame_score(self, game, points):
+            """Tambah skor mini-game + poin ospek sepadan.
+
+            Skor dibatasi pada nilai maksimum tiap mini-game supaya tidak bisa
+            melampaui 100% bila mini-game diulang (mis. saat uji/debug).
+            """
+            if game not in self.minigame_scores:
+                return
+            maks = self.minigame_max.get(game, 0)
+            sebelum = self.minigame_scores[game]
+            sesudah = min(sebelum + points, maks)
+            self.minigame_scores[game] = sesudah
+            # Poin ospek hanya untuk kenaikan nyata (tidak bisa di-farm).
+            self.add_ospek_points(max(0, sesudah - sebelum))
+
+        def minigame_total(self):
+            return sum(self.minigame_scores.values())
+
+        def minigame_max_total(self):
+            return sum(self.minigame_max.values())
+
+        def finish_minigames(self):
+            """Beri pencapaian bila semua mini-game sempurna."""
+            if all(self.minigame_scores[g] >= self.minigame_max[g]
+                   for g in self.minigame_scores):
+                self.add_achievement("minigame_sempurna")
+
+        # ---------------------------------------------------------------- #
+        #  Nilai & ranking
+        # ---------------------------------------------------------------- #
+        def category_scores(self):
+            """Nilai per kategori (0-100) untuk rapor ospek."""
+            rel = self.total_relationship_score()
+            rel_max = 10 * len(self.friend_relationship)
+            cats = {
+                "Poin Ospek": min(100, self.ospek_points * 4),
+                "Kedekatan": int(round(rel / rel_max * 100)) if rel_max else 0,
+                "Kuis AIK": int(round(self.quiz_score / self.quiz_total * 100)) if self.quiz_total else 0,
+                "Mini-game": int(round(self.minigame_total() / self.minigame_max_total() * 100)) if self.minigame_max_total() else 0,
+                "Konflik": int(round(self.conflicts_resolved() / self.conflicts_total() * 100)) if self.conflicts_total() else 100,
+            }
+            # Semua kategori wajib berada di rentang 0-100.
+            return {k: max(0, min(100, v)) for k, v in cats.items()}
+
+        def overall_score(self):
+            """Skor akhir 0-100 dari rata-rata kategori."""
+            cats = self.category_scores()
+            if not cats:
+                return 0
+            return int(round(sum(cats.values()) / len(cats)))
+
+        def leaderboard(self):
+            """Daftar (nama, skor, is_player) terurut menurun."""
+            rows = [(p["name"], p["base"], False) for p in OTHER_PARTICIPANTS]
+            rows.append(("Nata (kamu)", self.overall_score(), True))
+            rows.sort(key=lambda r: -r[1])
+            return rows
+
+        def player_rank(self):
+            """(peringkat, total peserta) untuk pemain."""
+            rows = self.leaderboard()
+            for i, (name, score, is_player) in enumerate(rows):
+                if is_player:
+                    return (i + 1, len(rows))
+            return (len(rows), len(rows))
 
         # ---------------------------------------------------------------- #
         #  Sistem hari + stamina
@@ -589,21 +911,31 @@ init python:
             return "Perlu Pengembangan Diri"
 
         def get_ending(self):
-            """Tentukan ending berdasarkan poin, hubungan, dan stat.
+            """Tentukan ending berdasarkan poin, hubungan, stat, dan konflik.
 
             Ambang dikalibrasi agar tiap cabang bisa dicapai dalam 7 hari:
-            - jalur "poin"  : fokus kompetisi/seminar  -> poin tinggi, rel rendah
+            - jalur "poin"  : fokus kompetisi/seminar/mini-game -> poin tinggi
             - jalur "sosial": fokus diskusi/bantu teman -> rel tinggi
             """
             pts = self.ospek_points
             rel_total = self.total_relationship_score()
+            c_total = self.conflicts_total()
+            c_resolved = self.conflicts_resolved()
 
-            if pts >= 18 and rel_total >= 14:
+            # Konflik yang gagal diselesaikan semuanya menutup ending terbaik.
+            konflik_buruk = c_total >= 2 and c_resolved == 0
+
+            if pts >= 24 and rel_total >= 14 and not konflik_buruk:
                 return (
                     "ENDING: SAHABAT SEPANJANG MASA",
                     "Kamu menjadi mahasiswa teladan sekaligus sahabat sejati bagi teman-teman ospekmu.",
                 )
-            if pts >= 18:
+            if konflik_buruk and rel_total < 14:
+                return (
+                    "ENDING: JALAN SENDIRI",
+                    "Kamu unggul dalam kegiatan, tetapi banyak hubungan yang renggang karena konflik tak terselesaikan.",
+                )
+            if pts >= 24:
                 return (
                     "ENDING: MAHASISWA INSPIRATIF",
                     "Prestasimu menonjol, meski kamu masih perlu lebih dekat dengan teman-teman.",
@@ -613,12 +945,12 @@ init python:
                     "ENDING: SAHABAT SEJATI",
                     "Kamu mungkin bukan yang paling menonjol, tetapi persahabatanmu sangat kuat.",
                 )
-            if pts >= 12:
+            if pts >= 19:
                 return (
                     "ENDING: MAHASISWA BERPRESTASI",
                     "Kamu aktif dan berprestasi selama ospek. Terus pertahankan!",
                 )
-            if pts >= 8:
+            if pts >= 12:
                 return (
                     "ENDING: MAHASISWA POTENSIAL",
                     "Kamu menunjukkan potensi yang baik. Masih banyak ruang untuk tumbuh.",
@@ -720,6 +1052,7 @@ screen hud():
             text "Poin Ospek: [ospek_tracker.ospek_points]" size 22 color "#ffffff"
             null height 4
             textbutton "Pencapaian ★" action Show("achievements")
+            textbutton "Papan Skor 🏆" action Show("leaderboard")
 
 
 # ------------------------------------------------------------------------- #
@@ -927,6 +1260,11 @@ label day_activity:
         call jalur_jurusan
     elif day == 5:
         call tantangan_tim
+    elif day == 6:
+        call konflik_antar_teman
+        call minigame_session
+    elif day == 7:
+        call konflik_antar_teman
 
     $ ospek_tracker.end_day()
 
@@ -1091,6 +1429,202 @@ label jalur_kesehatan:
 
 
 # ------------------------------------------------------------------------- #
+#  Konflik antar-teman
+# ------------------------------------------------------------------------- #
+label konflik_antar_teman:
+    python:
+        _candidates = [cid for cid in CONFLICTS if cid not in ospek_tracker.conflicts]
+        _cid = random.choice(_candidates) if _candidates else random.choice(list(CONFLICTS))
+        _conf = CONFLICTS[_cid]
+    $ _c_scene = _conf["scene"]
+    $ _c_intro = _conf["intro"]
+    scene expression _c_scene with dissolve
+    "[_c_intro]"
+    $ show_character(_conf["speaker"], "center")
+    $ _c_speaker = CHARACTER_INFO[_conf["speaker"]]["name"]
+    $ _c_line = _conf["line"]
+    "[_c_speaker] \"[_c_line]\""
+
+    python:
+        _opts = [(o["text"], _i) for _i, o in enumerate(_conf["options"])]
+        _pick = renpy.display_menu(_opts)
+        _chosen = _conf["options"][_pick]
+        _resolved = ospek_tracker.resolve_conflict(_cid, _pick)
+
+    $ _c_reply = _chosen["reply"]
+    $ _c_outcome = _chosen["outcome"]
+    "[_c_speaker] \"[_c_reply]\""
+    hide andi
+    hide momogi
+    hide rina
+    hide joko
+    hide pak_budi
+    hide sari
+    hide dimas
+    hide bu_ratna
+    "[_c_outcome]"
+    if _resolved:
+        "Kamu merasa lega — hubungan kalian justru semakin kuat."
+    else:
+        "Ada beban yang tersisa di hati. Mungkin lain kali bisa lebih baik."
+    return
+
+
+# ------------------------------------------------------------------------- #
+#  Mini-game 1: susun yel-yel
+# ------------------------------------------------------------------------- #
+label mini_yel_yel:
+    scene bg ospek_hall with dissolve
+    play music challenge_theme fadein 2.0 loop
+    show pak_budi at center
+    p "Saatnya lomba yel-yel! Susun kata-kata berikut menjadi yel-yel yang benar."
+    hide pak_budi
+
+    python:
+        _phrase = random.choice(YELL_PHRASES)
+        _words = _phrase.split()
+        _shuffled = _words[:]
+        random.shuffle(_shuffled)
+        while len(_shuffled) > 1 and _shuffled == _words:
+            random.shuffle(_shuffled)
+
+    $ renpy.say(None, "Kata acak: {}".format(" ".join(_shuffled)))
+
+    python:
+        _answer = renpy.input("Susun menjadi yel-yel (huruf kapital):").strip().upper()
+        _answer = " ".join(_answer.split())
+        _correct = (_answer == _phrase)
+        if _correct:
+            ospek_tracker.add_minigame_score("yel_yel", 3)
+            ospek_tracker.update_stat("leadership", 5)
+        else:
+            ospek_tracker.add_minigame_score("yel_yel", 1)
+            ospek_tracker.update_stat("leadership", 2)
+
+    if _correct:
+        "Tepat sekali! Seluruh peserta mengikuti yel-yelmu dengan semangat."
+        p "Bagus! Yel-yel itu membangkitkan semangat seluruh angkatan."
+    else:
+        $ renpy.say(None, "Yel-yel yang benar: {}".format(_phrase))
+        p "Hampir! Yang penting semangatnya tetap terjaga."
+    hide pak_budi
+    return
+
+
+# ------------------------------------------------------------------------- #
+#  Mini-game 2: teka-teki logika Islami
+# ------------------------------------------------------------------------- #
+label mini_teka_teki:
+    scene bg masjid with dissolve
+    play music quiz_theme fadein 2.0 loop
+    show joko at center
+    j "Sebelum istirahat, coba jawab teka-teki singkat ini. Isi dengan angka."
+    hide joko
+
+    python:
+        _rid = random.choice(RIDDLES)
+        renpy.say(None, _rid["question"])
+        _raw = renpy.input("Jawabanmu (angka):").strip()
+        try:
+            _num = int(_raw)
+        except ValueError:
+            _num = -1
+        if _num == _rid["answer"]:
+            ospek_tracker.add_minigame_score("teka_teki", 3)
+            ospek_tracker.update_stat("religious_knowledge", 6)
+            renpy.say(None, "Benar! " + _rid["explain"])
+        else:
+            ospek_tracker.add_minigame_score("teka_teki", 0)
+            renpy.say(None, "Belum tepat. Petunjuk: " + _rid["hint"])
+            renpy.say(None, "Jawaban: {} — {}".format(_rid["answer"], _rid["explain"]))
+    return
+
+
+# ------------------------------------------------------------------------- #
+#  Mini-game 3: tebak lanjutan ayat / hadis
+# ------------------------------------------------------------------------- #
+label mini_ayat:
+    scene bg masjid with dissolve
+    play music quiz_theme fadein 2.0 loop
+    show bu_ratna at center
+    br "Sekarang kita uji hafalan dan pemahamanmu. Pilih jawaban yang benar."
+    hide bu_ratna
+
+    python:
+        _q = random.choice(AYAT_QUESTIONS)
+        renpy.say("Bu Ratna", _q["q"])
+        _pick = renpy.display_menu([(o, _i) for _i, o in enumerate(_q["options"])])
+        if _pick == _q["answer"]:
+            ospek_tracker.add_minigame_score("ayat", 3)
+            ospek_tracker.update_stat("religious_knowledge", 6)
+            renpy.say(None, "Benar! " + _q["explain"])
+        else:
+            ospek_tracker.add_minigame_score("ayat", 0)
+            renpy.say(None, "Belum tepat. " + _q["explain"])
+    return
+
+
+# ------------------------------------------------------------------------- #
+#  Mini-game gabungan (dipakai sebagai kegiatan hari ke-6)
+# ------------------------------------------------------------------------- #
+label minigame_session:
+    call mini_yel_yel
+    call mini_teka_teki
+    call mini_ayat
+    python:
+        ospek_tracker.finish_minigames()
+    "Kamu menutup sesi permainan dengan pengalaman yang menyenangkan."
+    return
+
+
+# ------------------------------------------------------------------------- #
+#  Papan skor (leaderboard)
+# ------------------------------------------------------------------------- #
+screen leaderboard():
+    modal True
+    zorder 200
+
+    add "#000000cc"
+
+    frame:
+        align (0.5, 0.5)
+        xpadding 40
+        ypadding 30
+        xmaximum 900
+        background "#1b1b1bf2"
+
+        vbox:
+            spacing 12
+
+            text "PAPAN SKOR OSPEK" size 40 color "#f1c40f" xalign 0.5
+
+            $ _rows = ospek_tracker.leaderboard()
+            $ _rank, _total = ospek_tracker.player_rank()
+
+            for _i, (_name, _score, _is_player) in enumerate(_rows):
+                hbox:
+                    spacing 14
+                    text "[_i + 1]." size 26 color ("#f1c40f" if _is_player else "#ffffff") xsize 60
+                    text _name size 26 color ("#f1c40f" if _is_player else "#ffffff")
+                    text "[_score]" size 26 color ("#f1c40f" if _is_player else "#bbbbbb") xalign 1.0
+
+            null height 6
+            text "Peringkatmu: [_rank] dari [_total]" size 26 color "#2ecc71" xalign 0.5
+
+            null height 4
+            text "Nilai per kategori:" size 24 color "#ffffff"
+            $ _cats = ospek_tracker.category_scores()
+            for _cname, _cval in _cats.items():
+                hbox:
+                    spacing 10
+                    text _cname size 22 color "#dddddd" xsize 260
+                    text "[_cval]/100" size 22 color "#dddddd"
+
+            null height 6
+            textbutton "Tutup" action Hide("leaderboard") xalign 0.5
+
+
+# ------------------------------------------------------------------------- #
 #  Evaluasi akhir
 # ------------------------------------------------------------------------- #
 label final_evaluation:
@@ -1132,9 +1666,44 @@ label final_evaluation:
 
     python:
         _ach_count = len(ospek_tracker.achievement_list())
-    "Pencapaian yang kamu raih: [_ach_count] dari 16."
+        _ach_max = ospek_tracker.achievement_max()
+    "Pencapaian yang kamu raih: [_ach_count] dari [_ach_max]."
     if _ach_count:
         $ renpy.say(None, "Tekan tombol Pencapaian ★ pada HUD untuk melihat detailnya.")
+
+    # ---------------- Konflik ---------------- #
+    python:
+        _c_total = ospek_tracker.conflicts_total()
+        _c_ok = ospek_tracker.conflicts_resolved()
+    "Konflik antar-teman: [_c_ok] dari [_c_total] terselesaikan dengan damai."
+    python:
+        for _c in ospek_tracker.conflict_log:
+            _mark = "✔" if _c["resolved"] else "✘"
+            renpy.say(None, "{} {} — pilihanmu: {}".format(_mark, _c["title"], _c["choice"]))
+
+    # ---------------- Mini-game ---------------- #
+    python:
+        _mg = ospek_tracker.minigame_scores
+        _mg_txt = "Yel-yel {}/{}, Teka-teki {}/{}, Ayat {}/{}".format(
+            _mg["yel_yel"], ospek_tracker.minigame_max["yel_yel"],
+            _mg["teka_teki"], ospek_tracker.minigame_max["teka_teki"],
+            _mg["ayat"], ospek_tracker.minigame_max["ayat"])
+    "Skor mini-game: [_mg_txt]"
+
+    # ---------------- Nilai & ranking ---------------- #
+    python:
+        _overall = ospek_tracker.overall_score()
+        _rank, _total_p = ospek_tracker.player_rank()
+        if _rank == 1:
+            ospek_tracker.add_achievement("peringkat_1")
+        if _rank <= 3:
+            ospek_tracker.add_achievement("peringkat_3")
+        if _c_total and _c_ok == _c_total:
+            ospek_tracker.add_achievement("pendamai")
+
+    "Nilai akhir ospek kamu: [_overall]/100"
+    "Peringkat kamu: [_rank] dari [_total_p] peserta."
+    $ renpy.say(None, "Tekan tombol Papan Skor 🏆 pada HUD untuk melihat rincian nilai per kategori.")
 
     python:
         _end_title, _end_desc = ospek_tracker.get_ending()
