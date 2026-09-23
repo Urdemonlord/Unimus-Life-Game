@@ -84,7 +84,7 @@ define gui.title_text_size = 75
 
 # Definisikan path gambar
 define gui.main_menu_background = "gui/unimus_main_menu.png"
-define gui.game_menu_background = "gui/unimus_game_menu.png"
+define gui.game_menu_background = "gui/main_menu.png"
 
 # Gunakan transform di style
 style main_menu:

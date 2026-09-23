@@ -1,29 +1,45 @@
-# Ignore Ren'Py specific files
+# ------------------------------------------------------------------ #
+#  Unimus Life Game — berkas yang tidak perlu masuk repositori
+# ------------------------------------------------------------------ #
+
+# Berkas Ren'Py hasil kompilasi
 *.rpyc
+*.rpyb
+*.rpymc
 *.rpyi
-*.log
 *.bak
 *.swp
 *.DS_Store
 
-# Ignore system files
-Thumbs.db
-ehthumbs.db
+# Cache & analisis Ren'Py
+game/cache/
 
-# Ignore Python-specific files
-*.pyc
-*.pyo
-__pycache__/
-
-# Ignore Ren'Py's build and output directories
-/renpy/
-*.rpyc
-/renpy_versions/
-
-# Ignore log, trace, and error files
+# Berkas log, jejak, dan galat
 *.log
 *.trace
 *.errors.txt
 log.txt
 traceback.txt
 errors.txt
+
+# Simpanan (saves) bersifat lokal untuk tiap pemain
+game/saves/
+
+# Berkas sistem
+Thumbs.db
+ehthumbs.db
+
+# Pengaturan editor pribadi
+.vscode/
+.idea/
+
+# Berkas Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Direktori build & SDK
+/renpy/
+/renpy_versions/
+/build/
+/dist/
