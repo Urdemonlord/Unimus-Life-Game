@@ -191,6 +191,22 @@ init python:
     ]
 
     # --------------------------------------------------------------------- #
+    #  Label ramah-pemain untuk pencapaian (achievements)
+    # --------------------------------------------------------------------- #
+    ACHIEVEMENT_INFO = {
+        "master_leadership":          ("Jiwa Pemimpin", "Stat kepemimpinan mencapai 90."),
+        "master_discipline":          ("Disiplin Tinggi", "Stat kedisiplinan mencapai 90."),
+        "master_religious_knowledge": ("Paham AIK", "Pengetahuan Al-Islam & Kemuhammadiyahan mencapai 90."),
+        "master_academic_potential":  ("Cendekia Muda", "Potensi akademik mencapai 90."),
+        "quiz_perfect":               ("Ahli AIK", "Menjawab benar semua soal kuis AIK."),
+        "Andi_close_friend":          ("Sahabat Andi", "Kedekatan dengan Andi mencapai 8."),
+        "Momogi_close_friend":        ("Sahabat Momogi", "Kedekatan dengan Momogi mencapai 8."),
+        "Rina_close_friend":          ("Sahabat Rina", "Kedekatan dengan Rina mencapai 8."),
+        "Joko_close_friend":          ("Sahabat Joko", "Kedekatan dengan Joko mencapai 8."),
+        "Pak Budi_close_friend":      ("Dekat dengan Pak Budi", "Kedekatan dengan Pak Budi mencapai 8."),
+    }
+
+    # --------------------------------------------------------------------- #
     #  Tracker progres ospek
     # --------------------------------------------------------------------- #
     class OspekProgressTracker:
@@ -265,9 +281,7 @@ init python:
 
         def _check_relationship_milestone(self, character, score):
             if score >= 8:
-                milestone = "{}_close_friend".format(character)
-                if milestone not in self.achievements:
-                    self.achievements.append(milestone)
+                self.add_achievement("{}_close_friend".format(character))
 
         def add_ospek_points(self, points):
             self.ospek_points += points
@@ -283,10 +297,27 @@ init python:
             self._check_stat_achievement(stat_name)
 
         def _check_stat_achievement(self, stat_name):
+            # 'stamina' tidak dihitung: nilainya sudah 100 sejak awal.
+            if stat_name == "stamina":
+                return
             if self.stats[stat_name] >= 90:
-                achievement = "master_{}".format(stat_name)
-                if achievement not in self.achievements:
-                    self.achievements.append(achievement)
+                self.add_achievement("master_{}".format(stat_name))
+
+        def add_achievement(self, key):
+            """Tambahkan pencapaian (sekali saja)."""
+            if key not in self.achievements:
+                self.achievements.append(key)
+
+        def achievement_list(self):
+            """Daftar (judul, keterangan) pencapaian yang sudah didapat."""
+            result = []
+            for key in self.achievements:
+                info = ACHIEVEMENT_INFO.get(key)
+                if info:
+                    result.append(info)
+                else:
+                    result.append((key.replace("_", " ").title(), ""))
+            return result
 
         def add_conflict(self, conflict_description):
             if conflict_description not in self.conflicts:
@@ -338,6 +369,32 @@ init python:
             self.update_stat("stamina", self.NIGHT_RECOVERY)
             self.current_day += 1
 
+        def day_summary(self, day):
+            """Ringkasan aktivitas pada satu hari tertentu (untuk catatan harian)."""
+            entries = [e for e in self.day_log if e["day"] == day]
+            if not entries:
+                return "Tidak ada kegiatan tercatat."
+            key = entries[-1]["activity"]
+            act = ACTIVITIES.get(key)
+            if not act:
+                return "Tidak ada kegiatan tercatat."
+            return "{}  (Poin +{})".format(act["label"], act["points"])
+
+        def schedule_summary(self):
+            """Daftar (hari, ringkasan) seluruh kegiatan selama ospek."""
+            rows = []
+            for day in range(1, self.total_ospek_days + 1):
+                if any(e["day"] == day for e in self.day_log):
+                    rows.append((day, self.day_summary(day)))
+            return rows
+
+        def closest_friend(self):
+            """(nama, skor) teman dengan kedekatan tertinggi; None jika semua 0."""
+            name, data = self.best_friend()
+            if data["score"] <= 0:
+                return None
+            return (name, data["score"])
+
         # ---------------------------------------------------------------- #
         #  Kuis
         # ---------------------------------------------------------------- #
@@ -348,6 +405,11 @@ init python:
                 self.add_ospek_points(1)
                 self.update_stat("religious_knowledge", 5)
             return self.quiz_score
+
+        def finish_quiz(self):
+            """Dipanggil setelah seluruh soal kuis dijawab."""
+            if self.quiz_total and self.quiz_score == self.quiz_total:
+                self.add_achievement("quiz_perfect")
 
         # ---------------------------------------------------------------- #
         #  Evaluasi akhir & ending
@@ -488,6 +550,49 @@ screen hud():
             text "Hari [ospek_tracker.current_day]/[ospek_tracker.total_ospek_days]" size 22 color "#ffffff"
             text "Stamina: [ospek_tracker.stamina]%" size 22 color "#ffffff"
             text "Poin Ospek: [ospek_tracker.ospek_points]" size 22 color "#ffffff"
+            null height 4
+            textbutton "Pencapaian ★" action Show("achievements")
+
+
+# ------------------------------------------------------------------------- #
+#  Layar Pencapaian (achievements)
+# ------------------------------------------------------------------------- #
+screen achievements():
+    modal True
+    zorder 200
+
+    add "#000000cc"
+
+    frame:
+        align (0.5, 0.5)
+        xpadding 40
+        ypadding 30
+        xmaximum 900
+        background "#1b1b1bf2"
+
+        vbox:
+            spacing 14
+
+            text "PENCAPAIAN" size 40 color "#f1c40f" xalign 0.5
+
+            $ _ach = ospek_tracker.achievement_list()
+
+            if _ach:
+                for _title, _desc in _ach:
+                    hbox:
+                        spacing 12
+                        text "★" size 26 color "#f1c40f" yalign 0.0
+                        vbox:
+                            spacing 2
+                            text _title size 26 color "#ffffff"
+                            if _desc:
+                                text _desc size 20 color "#bbbbbb"
+            else:
+                text "Belum ada pencapaian. Teruslah berusaha!" size 24 color "#bbbbbb" xalign 0.5
+
+            null height 6
+
+            textbutton "Tutup" action Hide("achievements") xalign 0.5
 
 
 # ------------------------------------------------------------------------- #
@@ -584,19 +689,35 @@ label day_loop:
         p "Kamu terlihat lelah, Nata. Sebaiknya istirahat dulu hari ini agar tidak tumbang."
         hide pak_budi
 
-    jump day_activity
+    menu:
+        "Pilih kegiatan hari ini":
+            jump day_activity
+
+        "Jelajah kampus & bicara dengan teman":
+            call navigasi_bebas
+            jump day_loop
 
 
 label day_activity:
     python:
-        _items = []
-        for _key in ospek_tracker.available_activities():
-            _act = ACTIVITIES[_key]
-            if _act["cost"]:
-                _items.append(("{}  (Stamina -{})".format(_act["label"], _act["cost"]), _key))
+        while True:
+            _items = []
+            for _key in ospek_tracker.available_activities():
+                _act = ACTIVITIES[_key]
+                if _act["cost"]:
+                    _items.append(("{}  (Stamina -{})".format(_act["label"], _act["cost"]), _key))
+                else:
+                    _items.append((_act["label"], _key))
+            _items.append(("Lihat catatan harian", "__log__"))
+            _chosen = renpy.display_menu(_items)
+            if _chosen != "__log__":
+                break
+            _rows = ospek_tracker.schedule_summary()
+            if _rows:
+                for _d, _txt in _rows:
+                    renpy.say(None, "Hari {}: {}".format(_d, _txt))
             else:
-                _items.append((_act["label"], _key))
-        _chosen = renpy.display_menu(_items)
+                renpy.say(None, "Belum ada kegiatan tercatat.")
 
     $ _result = ospek_tracker.do_activity(_chosen)
 
@@ -646,6 +767,7 @@ label kuis_aik:
                 renpy.say(None, "Benar! " + _q["explain"])
             else:
                 renpy.say(None, "Belum tepat. " + _q["explain"])
+        ospek_tracker.finish_quiz()
 
     p "Skor kuis kamu: [ospek_tracker.quiz_score]/[ospek_tracker.quiz_total]. Ilmu itu cahaya — teruslah belajar."
     hide pak_budi
@@ -711,11 +833,33 @@ label final_evaluation:
     $ _rel = ospek_tracker.total_relationship_score()
     "Poin ospek: [_poin]  |  Skor kuis AIK: [_kuis]  |  Total kedekatan: [_rel]"
 
+    "Catatan kegiatan harianmu:"
+    python:
+        for _d, _txt in ospek_tracker.schedule_summary():
+            renpy.say(None, "Hari {}: {}".format(_d, _txt))
+
+    python:
+        _best = ospek_tracker.closest_friend()
+        if _best:
+            _best_name, _best_score = _best
+        else:
+            _best_name, _best_score = None, 0
+    if _best_name:
+        "Teman yang paling dekat denganmu adalah [_best_name] (kedekatan [_best_score]/10)."
+    else:
+        "Kamu belum sempat dekat dengan siapa pun selama ospek ini."
+
     "Hubungan Pertemanan:"
     python:
         for _name, _val in ospek_tracker.friend_relationship.items():
             _status = ospek_tracker.get_relationship_status(_val["score"])
             renpy.say(None, "{}: {} (Skor: {})".format(_name, _status, _val["score"]))
+
+    python:
+        _ach_count = len(ospek_tracker.achievement_list())
+    "Pencapaian yang kamu raih: [_ach_count] dari 10."
+    if _ach_count:
+        $ renpy.say(None, "Tekan tombol Pencapaian ★ pada HUD untuk melihat detailnya.")
 
     python:
         _end_title, _end_desc = ospek_tracker.get_ending()

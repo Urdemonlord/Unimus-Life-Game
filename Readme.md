@@ -22,8 +22,16 @@ keputusan menentukan nilai akhir dan ending yang kamu dapatkan.
 - **Statistik pemain** — leadership, discipline, religious_knowledge,
   academic_potential, stamina.
 - **Banyak ending** — ditentukan oleh poin ospek, total kedekatan, dan stat.
+- **Pencapaian (achievements)** — 10 pencapaian, mis. "Ahli AIK" (kuis
+  sempurna), "Jiwa Pemimpin" (leadership 90), dan "Sahabat <nama>"
+  (kedekatan 8). Bisa dibuka lewat tombol **Pencapaian ★** di HUD.
+- **Catatan harian** — lihat rekap kegiatan tiap hari, baik saat bermain
+  maupun di ringkasan akhir.
+- **Sahabat terdekat** — di akhir ospek ditampilkan teman yang paling
+  dekat denganmu.
 - **HUD** — menampilkan hari, stamina, dan poin ospek selama permainan.
-- **Mode jelajah bebas** — pindah lokasi kampus dan mengobrol dengan karakter.
+- **Mode jelajah bebas** — pindah lokasi kampus dan mengobrol dengan karakter
+  (tersedia sebagai pilihan setiap hari).
 - **Antarmuka lintas platform** — desktop dan mobile (tata letak khusus ponsel).
 
 ## Persyaratan Sistem 💻
