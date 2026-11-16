@@ -14,10 +14,10 @@ init python:
     #  "rel" = kunci pada ospek_tracker.friend_relationship (None utk pemain)
     CHARACTER_INFO = {
         "nata":     {"image": "nata",     "name": "Nata",     "rel": None},
-        "andi":     {"image": "andi",     "name": "Andi",     "rel": "Andi"},
-        "momogi":   {"image": "momogi",   "name": "Momogi",   "rel": "Momogi"},
-        "rina":     {"image": "rina",     "name": "Rina",     "rel": "Rina"},
         "joko":     {"image": "joko",     "name": "Joko",     "rel": "Joko"},
+        "kirana":   {"image": "kirana",   "name": "Kirana",   "rel": "Kirana"},
+        "rina":     {"image": "rina",     "name": "Rina",     "rel": "Rina"},
+        "yosep":     {"image": "yosep",     "name": "Yosep",     "rel": "Yosep"},
         "pak_budi": {"image": "pak_budi", "name": "Pak Budi", "rel": "Pak Budi"},
         # --- karakter baru ---
         "sari":     {"image": "sari",     "name": "Sari",     "rel": "Sari"},
@@ -26,14 +26,14 @@ init python:
     }
 
     CHARACTER_DIALOGUES = {
-        "andi": [
+        "joko": [
             "Semangat, Nata! Ospek itu tempat kita tumbuh bersama.",
             "Kalau ada tugas kelompok, aku siap bantu kapan saja.",
             "Jangan lupa istirahat, kesehatan juga bagian dari ibadah.",
             "Aku ikut organisasi kampus, di sana kita belajar memimpin.",
             "Kita ini satu angkatan, jadi harus saling mengangkat, ya!",
         ],
-        "momogi": [
+        "kirana": [
             "Aku jauh dari rumah, tapi di sini aku belajar mandiri.",
             "Kita perantau harus saling menguatkan, ya!",
             "Cita-citaku besar, dan ospek ini langkah pertamanya.",
@@ -47,7 +47,7 @@ init python:
             "Kalau lelah, istirahatlah. Tubuh ini juga amanah.",
             "Aku suka belajar tentang gizi dan kesehatan masyarakat.",
         ],
-        "joko": [
+        "yosep": [
             "Disiplin adalah kunci. Tanpa itu, ilmu sulit bermanfaat.",
             "Aku tegas bukan karena benci, tapi karena sayang.",
             "Nilai keagamaan harus jadi fondasi, bukan hiasan.",
@@ -95,17 +95,17 @@ init python:
         {
             "id": "sapa_pagi",
             "scene": "bg kampus_depan",
-            "speaker": "andi", "position": "center",
+            "speaker": "joko", "position": "center",
             "line": "Nata! Ayo jalan bareng ke aula, jangan sampai telat lagi.",
-            "narration": "Andi menyapamu dengan semangat di depan kampus.",
-            "rel": {"char": "Andi", "amount": 1},
+            "narration": "Joko menyapamu dengan semangat di depan kampus.",
+            "rel": {"char": "Joko", "amount": 1},
         },
         {
             "id": "buku_tertinggal",
             "scene": "bg perpustakaan",
-            "speaker": "momogi", "position": "center",
+            "speaker": "kirana", "position": "center",
             "line": "Aku pinjamkan catatanku, Nata. Belajar bareng yuk!",
-            "narration": "Momogi berbagi catatan di perpustakaan.",
+            "narration": "Kirana berbagi catatan di perpustakaan.",
             "stat": {"stat": "academic_potential", "amount": 4},
         },
         {
@@ -127,10 +127,10 @@ init python:
         {
             "id": "kajian_singkat",
             "scene": "bg masjid",
-            "speaker": "joko", "position": "center",
+            "speaker": "yosep", "position": "center",
             "line": "Sebelum mulai, mari kita renungkan sejenak ayat hari ini.",
-            "narration": "Joko mengajakmu kajian singkat di masjid kampus.",
-            "rel": {"char": "Joko", "amount": 1},
+            "narration": "Yosep mengajakmu kajian singkat di masjid kampus.",
+            "rel": {"char": "Yosep", "amount": 1},
             "stat": {"stat": "religious_knowledge", "amount": 6},
         },
         {
@@ -160,19 +160,19 @@ init python:
         {
             "id": "kantin_rame",
             "scene": "bg kantin",
-            "speaker": "momogi", "position": "center",
+            "speaker": "kirana", "position": "center",
             "line": "Kantin penuh! Sini, aku sudah pesankan tempat untuk kita.",
             "narration": "Kamu makan siang bersama teman-teman di kantin.",
-            "rel": {"char": "Momogi", "amount": 1},
+            "rel": {"char": "Kirana", "amount": 1},
         },
         {
             "id": "olahraga_pagi",
             "scene": "bg kampus_depan",
-            "speaker": "andi", "position": "center",
+            "speaker": "joko", "position": "center",
             "line": "Ayo jogging dulu sebelum ospek, biar badan segar!",
-            "narration": "Kamu berolahraga pagi bersama Andi.",
+            "narration": "Kamu berolahraga pagi bersama Joko.",
             "stat": {"stat": "stamina", "amount": 6},
-            "rel": {"char": "Andi", "amount": 1},
+            "rel": {"char": "Joko", "amount": 1},
         },
     ]
 
@@ -185,28 +185,28 @@ init python:
         "tugas_tidak_adil": {
             "title": "Pembagian Tugas Tidak Adil",
             "scene": "bg pusat_mahasiswa",
-            "intro": "Tugas kelompok menumpuk padamu, sementara Andi dan Joko terlihat santai.",
-            "speaker": "andi",
+            "intro": "Tugas kelompok menumpuk padamu, sementara Joko dan Yosep terlihat santai.",
+            "speaker": "joko",
             "line": "Santai saja, Nata. Kan kamu yang paling bisa.",
             "options": [
                 {
                     "text": "Bicara baik-baik dan bagi tugas ulang",
                     "reply": "Kamu benar, aku kurang peka. Ayo kita bagi ulang!",
-                    "rel": {"Andi": 2, "Joko": 1}, "points": 2,
+                    "rel": {"Joko": 2, "Yosep": 1}, "points": 2,
                     "stat": {"leadership": 5}, "resolved": True,
                     "outcome": "Kamu menyelesaikan konflik dengan komunikasi terbuka.",
                 },
                 {
                     "text": "Diam saja dan kerjakan semuanya sendiri",
                     "reply": "Ya sudah, kalau kamu memang mau begitu.",
-                    "rel": {"Andi": -1}, "points": 1,
+                    "rel": {"Joko": -1}, "points": 1,
                     "stat": {"stamina": -10}, "resolved": False,
                     "outcome": "Tugas selesai, tapi kamu kelelahan dan menyimpan kesal.",
                 },
                 {
                     "text": "Marah dan meninggalkan ruangan",
                     "reply": "Nata, kenapa kamu jadi begitu?",
-                    "rel": {"Andi": -2, "Joko": -1}, "points": 0,
+                    "rel": {"Joko": -2, "Yosep": -1}, "points": 0,
                     "stat": {}, "resolved": False,
                     "outcome": "Kamu pergi dengan marah. Hubungan jadi renggang.",
                 },
@@ -268,23 +268,23 @@ init python:
         "iri_prestasi": {
             "title": "Kecemburuan atas Prestasimu",
             "scene": "bg ruang_seminar",
-            "intro": "Joko terlihat kesal karena kamu dipuji Pak Budi di depan kelas.",
-            "speaker": "joko",
+            "intro": "Yosep terlihat kesal karena kamu dipuji Pak Budi di depan kelas.",
+            "speaker": "yosep",
             "line": "Enak ya, selalu dapat pujian. Kamu pasti disayang dosen.",
             "options": [
                 {
-                    "text": "Akui kerja keras Joko juga",
+                    "text": "Akui kerja keras Yosep juga",
                     "reply": "Terima kasih, Nata. Aku memang sedang merasa tidak cukup baik.",
-                    "rel": {"Joko": 2, "Pak Budi": 1}, "points": 2,
+                    "rel": {"Yosep": 2, "Pak Budi": 1}, "points": 2,
                     "stat": {"leadership": 3}, "resolved": True,
                     "outcome": "Kamu merendahkan hati dan mengangkat temanmu sendiri.",
                 },
                 {
                     "text": "Membanggakan diri sendiri",
                     "reply": "Ya, karena aku memang berusaha lebih keras.",
-                    "rel": {"Joko": -2}, "points": 0,
+                    "rel": {"Yosep": -2}, "points": 0,
                     "stat": {}, "resolved": False,
-                    "outcome": "Joko menjauh. Persaingan yang tidak sehat mulai tumbuh.",
+                    "outcome": "Yosep menjauh. Persaingan yang tidak sehat mulai tumbuh.",
                 },
             ],
         },
@@ -411,7 +411,7 @@ init python:
             "cost": 35,
             "points": 3,
             "effects": {"academic_potential": 10, "discipline": 5},
-            "rel": {"Joko": 1},
+            "rel": {"Yosep": 1},
             "result": "Kamu berjuang keras dalam lomba dan mendapat pengalaman berharga.",
         },
         "diskusi_keagamaan": {
@@ -427,7 +427,7 @@ init python:
             "cost": 20,
             "points": 1,
             "effects": {"discipline": 6},
-            "rel": {"Andi": 1},
+            "rel": {"Joko": 1},
             "result": "Tubuhmu segar dan semangatmu kembali setelah berolahraga.",
         },
         "bantu_teman": {
@@ -435,7 +435,7 @@ init python:
             "cost": 15,
             "points": 1,
             "effects": {"leadership": 2},
-            "rel": {"Momogi": 1, "Rina": 1},
+            "rel": {"Kirana": 1, "Rina": 1},
             "result": "Kamu menolong teman yang kesulitan — nilai ta'awun yang nyata.",
         },
         "istirahat": {
@@ -518,10 +518,10 @@ init python:
         "master_religious_knowledge": ("Paham AIK", "Pengetahuan Al-Islam & Kemuhammadiyahan mencapai 90."),
         "master_academic_potential":  ("Cendekia Muda", "Potensi akademik mencapai 90."),
         "quiz_perfect":               ("Ahli AIK", "Menjawab benar semua soal kuis AIK."),
-        "Andi_close_friend":          ("Sahabat Andi", "Kedekatan dengan Andi mencapai 8."),
-        "Momogi_close_friend":        ("Sahabat Momogi", "Kedekatan dengan Momogi mencapai 8."),
+        "Andi_close_friend":          ("Sahabat Joko", "Kedekatan dengan Joko mencapai 8."),
+        "Momogi_close_friend":        ("Sahabat Kirana", "Kedekatan dengan Kirana mencapai 8."),
         "Rina_close_friend":          ("Sahabat Rina", "Kedekatan dengan Rina mencapai 8."),
-        "Joko_close_friend":          ("Sahabat Joko", "Kedekatan dengan Joko mencapai 8."),
+        "Joko_close_friend":          ("Sahabat Yosep", "Kedekatan dengan Yosep mencapai 8."),
         "Pak Budi_close_friend":      ("Dekat dengan Pak Budi", "Kedekatan dengan Pak Budi mencapai 8."),
         "Sari_close_friend":          ("Dekat dengan Kak Sari", "Kedekatan dengan Sari mencapai 8."),
         "Dimas_close_friend":         ("Sahabat Sekamar", "Kedekatan dengan Dimas mencapai 8."),
@@ -548,10 +548,10 @@ init python:
         def __init__(self):
             self.ospek_points = 0
             self.friend_relationship = {
-                "Andi":     {"score": 0, "background": "Aktivis mahasiswa dengan semangat tinggi"},
-                "Momogi":   {"score": 0, "background": "Mahasiswa perantauan dengan cita-cita besar"},
+                "Joko":     {"score": 0, "background": "Aktivis mahasiswa dengan semangat tinggi"},
+                "Kirana":   {"score": 0, "background": "Mahasiswa perantauan dengan cita-cita besar"},
                 "Rina":     {"score": 0, "background": "Aktivis kesehatan dan kemanusiaan"},
-                "Joko":     {"score": 0, "background": "Senior tegas dengan nilai keagamaan kuat"},
+                "Yosep":     {"score": 0, "background": "Senior tegas dengan nilai keagamaan kuat"},
                 "Pak Budi": {"score": 0, "background": "Pembimbing spiritual dengan pengalaman luas"},
                 "Sari":     {"score": 0, "background": "Kakak senior yang ramah dan suka membantu"},
                 "Dimas":    {"score": 0, "background": "Teman sekamar yang ceria dan solid"},
@@ -982,11 +982,11 @@ default ospek_tracker = OspekProgressTracker()
 #  Karakter
 # ------------------------------------------------------------------------- #
 define e = Character("Nata", who_color="#3498db")
-define a = Character("Andi", who_color="#2ecc71")
-define l = Character("Momogi", who_color="#e74c3c")
+define a = Character("Joko", who_color="#2ecc71")
+define l = Character("Kirana", who_color="#e74c3c")
 define p = Character("Pak Budi", who_color="#f39c12")
 define r = Character("Rina", who_color="#9b59b6")
-define j = Character("Joko", who_color="#1abc9c")
+define j = Character("Yosep", who_color="#1abc9c")
 # --- karakter baru ---
 define s = Character("Sari", who_color="#e67e22")
 define d = Character("Dimas", who_color="#16a085")
@@ -996,11 +996,9 @@ define br = Character("Bu Ratna", who_color="#8e44ad")
 #  Gambar karakter
 # ------------------------------------------------------------------------- #
 image nata = "images/characters/nata.png"
-image andi = "images/characters/andi.png"
-image momogi = "images/characters/momogi.png"
+image joko = "images/characters/joko.png"
 image pak_budi = "images/characters/pak_budi.png"
 image rina = "images/characters/rina.png"
-image joko = "images/characters/joko.png"
 # --- karakter baru ---
 image sari = "images/characters/sari.png"
 image dimas = "images/characters/dimas.png"
@@ -1114,15 +1112,15 @@ label start:
     show pak_budi at center
     p "Selamat datang di Universitas Muhammadiyah Semarang. Ospek ini tidak hanya tentang belajar akademik, tapi juga memperkenalkanmu pada nilai-nilai Islam yang akan membimbing hidupmu."
 
-    show andi at left
-    show momogi at right
+    show joko at left
+    show kirana at right
     a "Ospek di Unimus memang penuh tantangan, Nata. Tapi, kita akan belajar banyak di sini."
     l "Kita akan menghadapi berbagai tantangan yang tidak hanya menguji pengetahuan, tapi juga karakter kita."
-    hide momogi
+    hide kirana
     show rina at right
     r "Semuanya akan lebih mudah jika kita saling mendukung. Jangan ragu untuk berbagi dan belajar bersama."
     hide rina
-    hide andi
+    hide joko
 
     # ------------------------------------------------------------------ #
     #  Pemilihan jurusan
@@ -1134,23 +1132,23 @@ label start:
         "Teknik Informatika":
             $ ospek_tracker.add_ospek_points(2)
             $ ospek_tracker.set_major("Teknik Informatika")
-            $ ospek_tracker.update_relationship("Andi", 2)
+            $ ospek_tracker.update_relationship("Joko", 2)
             show nata at left
-            show andi at right
+            show joko at right
             e "Teknik Informatika adalah pilihanku!"
             a "Keren! Semoga kita bisa berkontribusi lewat teknologi yang mendukung nilai-nilai Islam."
-            hide andi
+            hide joko
             hide nata
 
         "Manajemen":
             $ ospek_tracker.add_ospek_points(2)
             $ ospek_tracker.set_major("Manajemen")
-            $ ospek_tracker.update_relationship("Momogi", 2)
+            $ ospek_tracker.update_relationship("Kirana", 2)
             show nata at left
-            show momogi at right
+            show kirana at right
             e "Aku memilih Manajemen."
             l "Bagus! Kita akan belajar bagaimana menjadi pemimpin yang amanah."
-            hide momogi
+            hide kirana
             hide nata
 
         "Kesehatan":
@@ -1170,13 +1168,13 @@ label start:
 
     # Sapaan singkat bernuansa jurusan
     if ospek_tracker.current_major == "Teknik Informatika":
-        show andi at center
+        show joko at center
         a "Sebagai anak Informatika, kita akan banyak berkutat di lab komputer. Siap?"
-        hide andi
+        hide joko
     elif ospek_tracker.current_major == "Manajemen":
-        show momogi at center
+        show kirana at center
         l "Anak Manajemen harus siap memimpin. Kita akan banyak berlatih presentasi!"
-        hide momogi
+        hide kirana
     elif ospek_tracker.current_major == "Kesehatan":
         show rina at center
         r "Anak Kesehatan akan belajar banyak di lab. Ilmu kita untuk menolong sesama."
@@ -1312,14 +1310,14 @@ label tantangan_tim:
     scene bg student_center with dissolve
     play music challenge_theme fadein 2.0 loop
     show pak_budi at center
-    show joko at right
+    show yosep at right
     p "Saatnya tantangan kerja tim! Di sini kita menguji nilai ta'awun (saling tolong-menolong) dan kepemimpinan. Pilihlah dengan bijak!"
     hide pak_budi
 
     menu:
         "Ambil inisiatif memimpin tim":
             $ ospek_tracker.add_ospek_points(3)
-            $ ospek_tracker.update_relationship("Joko", 1)
+            $ ospek_tracker.update_relationship("Yosep", 1)
             $ ospek_tracker.update_relationship("Pak Budi", 2)
             show nata at left
             e "Saya akan memimpin tim ini dan mengatur strategi agar tugas ini selesai dengan baik."
@@ -1327,8 +1325,8 @@ label tantangan_tim:
 
         "Fokus pada peran supportif":
             $ ospek_tracker.add_ospek_points(2)
-            $ ospek_tracker.update_relationship("Andi", 1)
-            $ ospek_tracker.update_relationship("Momogi", 1)
+            $ ospek_tracker.update_relationship("Joko", 1)
+            $ ospek_tracker.update_relationship("Kirana", 1)
             show nata at left
             e "Saya akan mendukung teman-teman dalam menyelesaikan tugas ini."
             j "Kerja tim yang solid! Setiap kontribusi itu bernilai."
@@ -1336,12 +1334,12 @@ label tantangan_tim:
         "Mengalah dan mengalahkan ego":
             $ ospek_tracker.add_ospek_points(1)
             $ ospek_tracker.update_relationship("Rina", 2)
-            $ ospek_tracker.update_relationship("Joko", 1)
+            $ ospek_tracker.update_relationship("Yosep", 1)
             show nata at left
             e "Saya akan mendengarkan pendapat teman-teman dulu sebelum memutuskan."
             j "Sikap rendah hati itu kekuatan, bukan kelemahan. Bagus."
 
-    hide joko
+    hide yosep
     hide nata
     return
 
@@ -1362,7 +1360,7 @@ label random_event:
     $ show_character(_ev["speaker"], "center")
     "[_ev_speaker] \"[_ev_line]\""
     python:
-        for _k in ("sari", "dimas", "bu_ratna", "andi", "momogi", "rina", "joko", "pak_budi"):
+        for _k in ("sari", "dimas", "bu_ratna", "joko", "kirana", "rina", "yosep", "pak_budi"):
             renpy.hide(CHARACTER_INFO[_k]["image"])
     return
 
@@ -1383,34 +1381,34 @@ label jalur_jurusan:
 label jalur_informatika:
     scene bg lab_komputer with dissolve
     play music challenge_theme fadein 2.0 loop
-    show andi at center
+    show joko at center
     a "Nata, di lab ini kita belajar membuat aplikasi sederhana. Mau coba?"
     e "Tentu! Aku penasaran bagaimana teknologi bisa membantu banyak orang."
     python:
-        ospek_tracker.update_relationship("Andi", 2)
+        ospek_tracker.update_relationship("Joko", 2)
         ospek_tracker.update_stat("academic_potential", 8)
         ospek_tracker.add_ospek_points(3)
         ospek_tracker.add_achievement("jalur_informatika")
     a "Kode yang baik itu bukan yang pintar, tapi yang mudah dipahami orang lain."
     "Kamu menghabiskan hari itu dengan menyusun program pertamamu. Rasanya melelahkan tapi menyenangkan."
-    hide andi
+    hide joko
     return
 
 
 label jalur_manajemen:
     scene bg ruang_seminar with dissolve
     play music challenge_theme fadein 2.0 loop
-    show momogi at center
+    show kirana at center
     l "Nata, kita diminta memimpin rapat kecil. Berani mencoba?"
     e "Ayo! Aku ingin belajar bagaimana mengatur tim dengan baik."
     python:
-        ospek_tracker.update_relationship("Momogi", 2)
+        ospek_tracker.update_relationship("Kirana", 2)
         ospek_tracker.update_stat("leadership", 8)
         ospek_tracker.add_ospek_points(3)
         ospek_tracker.add_achievement("jalur_manajemen")
     l "Pemimpin yang baik itu mendengar dulu, baru memutuskan. Kamu sudah melakukannya!"
     "Kamu memimpin rapat dengan tenang, mendengar setiap pendapat, lalu mengambil kesimpulan."
-    hide momogi
+    hide kirana
     return
 
 
@@ -1457,10 +1455,10 @@ label konflik_antar_teman:
     $ _c_reply = _chosen["reply"]
     $ _c_outcome = _chosen["outcome"]
     "[_c_speaker] \"[_c_reply]\""
-    hide andi
-    hide momogi
-    hide rina
     hide joko
+    hide kirana
+    hide rina
+    hide yosep
     hide pak_budi
     hide sari
     hide dimas
@@ -1520,9 +1518,9 @@ label mini_yel_yel:
 label mini_teka_teki:
     scene bg masjid with dissolve
     play music quiz_theme fadein 2.0 loop
-    show joko at center
+    show yosep at center
     j "Sebelum istirahat, coba jawab teka-teki singkat ini. Isi dengan angka."
-    hide joko
+    hide yosep
 
     python:
         _rid = random.choice(RIDDLES)
@@ -1735,43 +1733,43 @@ init python:
         "kampus_depan": {
             "name": "Depan Kampus",
             "background": "bg kampus_depan",
-            "available_characters": ["nata", "andi", "momogi", "pak_budi"],
+            "available_characters": ["nata", "joko", "kirana", "pak_budi"],
             "music": "audio/ospek_welcome.mp3",
         },
         "aula_ospek": {
             "name": "Aula Ospek",
             "background": "bg aula_ospek",
-            "available_characters": ["pak_budi", "joko", "rina"],
+            "available_characters": ["pak_budi", "yosep", "rina"],
             "music": "audio/ospek_welcome.mp3",
         },
         "ruang_kuliah": {
             "name": "Ruang Kuliah",
             "background": "bg ruang_kuliah",
-            "available_characters": ["pak_budi", "andi", "rina"],
+            "available_characters": ["pak_budi", "joko", "rina"],
             "music": "audio/quiz_theme.mp3",
         },
         "pusat_mahasiswa": {
             "name": "Pusat Mahasiswa",
             "background": "bg pusat_mahasiswa",
-            "available_characters": ["momogi", "joko", "andi"],
+            "available_characters": ["kirana", "yosep", "joko"],
             "music": "audio/challenge_theme.mp3",
         },
         "kantin": {
             "name": "Kantin Kampus",
             "background": "bg kantin",
-            "available_characters": ["dimas", "rina", "momogi"],
+            "available_characters": ["dimas", "rina", "kirana"],
             "music": "audio/ospek_welcome.mp3",
         },
         "perpustakaan": {
             "name": "Perpustakaan",
             "background": "bg perpustakaan",
-            "available_characters": ["momogi", "bu_ratna", "andi"],
+            "available_characters": ["kirana", "bu_ratna", "joko"],
             "music": "audio/quiz_theme.mp3",
         },
         "masjid": {
             "name": "Masjid Kampus",
             "background": "bg masjid",
-            "available_characters": ["joko", "pak_budi", "rina"],
+            "available_characters": ["yosep", "pak_budi", "rina"],
             "music": "audio/ospek_welcome.mp3",
         },
     }
@@ -1834,6 +1832,6 @@ label pilih_karakter:
         $ show_character(_cid, "center")
         $ interact(_cid)
         python:
-            for _k in ("andi", "momogi", "rina", "joko", "pak_budi", "sari", "dimas", "bu_ratna"):
+            for _k in ("joko", "kirana", "rina", "yosep", "pak_budi", "sari", "dimas", "bu_ratna"):
                 renpy.hide(CHARACTER_INFO[_k]["image"])
     return
